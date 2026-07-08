@@ -25,6 +25,7 @@
 				<div style="width: 40% class=" containerpadding-y-5">
 					<%-- action属性にサーブレットを指定 --%>
 					<form action="./logout" method="post">
+					<p>ログインユーザー情報</p>
 						<table class="table table-bordered">
 							<tr>
 								<td rowspan="2" class="text-center"><span
@@ -42,7 +43,7 @@
 				</div>
 			</div>
 			<%-- action属性にサーブレットを指定 --%>
-			<h2>いまの気持ちを叫ぼう！</h2>
+			<p>いまの気持ちを叫ぼう！</p>
 			<form action="./bbs" method="post">
 				<table class="table">
 					<tr>
@@ -50,6 +51,15 @@
 							value="" size="60" /></td>
 						<td><input class="btn" type="submit" value="叫ぶ" /></td>
 					</tr>
+					
+					<%-- リクエストスコープにalertがあれば --%>
+					<c:if test="${requestScope.alert != null && requestScope.alert != '' }">
+						<tr>
+							<td colspan="2" class="color-error text-left">
+								<c:out value="${requestScope.alert}" />
+							</td>
+						</tr>
+					</c:if>
 				</table>
 			</form>
 		</div>
@@ -60,7 +70,7 @@
 				type="java.util.ArrayList<dto.ShoutDTO>" />
 			<div class="padding-y-5">
 				<div style="width: 40%" class="container padding-y-5">
-				<h3>みんなの叫び</h3>
+				<p>みんなの叫び</p>
 					<%-- action属性にサーブレットを指定 --%>
 					<c:forEach var="shout" items="${shouts}">
 						<table class="table table-striped table-bordered">
@@ -73,7 +83,8 @@
 								<td>${shout.date}</td>
 							</tr>
 							<tr>
-								<td colspan="2"><textarea rows="5" class="form-control">${shout.writing}</textarea></td>
+							<%-- 表示領域を入力不可にする --%>
+								<td colspan="2"><textarea rows="5" class="form-control" readonly>${shout.writing}</textarea></td>
 							</tr>
 						</table>
 					</c:forEach>

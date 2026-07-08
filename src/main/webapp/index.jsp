@@ -20,6 +20,7 @@
 <div class="padding-y-5">
 <div style="width: 40%" class="container padding-y-5">
 <form action="./login" method="post">
+<p class="text-center">ログインIDとパスワードを入力してください</p>
 	<table style="width: 400px; margin: 0 auto;" class="table">
 		<tr>
 			<%-- ログインID入力欄の名前はloginId --%>

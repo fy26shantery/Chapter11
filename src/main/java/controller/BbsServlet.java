@@ -23,16 +23,21 @@ public class BbsServlet extends HttpServlet {
 	// 直接アクセスがあった場合は index.jsp  に処理を転送
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
+
 	}
 
 	// top.jsp の「叫ぶ」ボタンから呼ばれる
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
 		String writing = request.getParameter("shout");
 		RequestDispatcher dispatcher;
+
+		String message = null;
 
 		// 書き込み内容があれば、リストに追加
 		if (!writing.equals("")) {
@@ -53,6 +58,13 @@ public class BbsServlet extends HttpServlet {
 
 			// リストをセッションに保存
 			session.setAttribute("shouts", list);
+
+		} else if (writing.isEmpty()) {//叫びが未入力の場合のエラー文表示
+			message = "未入力、またはスペースのみ入力されています。入力してください。";
+
+			//エラーメッセージをリクエストオブジェクトに保存
+			request.setAttribute("alert", message);
+
 		}
 
 		// top.jsp に処理を転送

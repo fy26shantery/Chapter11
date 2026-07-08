@@ -23,23 +23,6 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LoginServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	//index.jspの「ログイン」ボタンから呼び出される
@@ -64,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		} else if (!loginId.matches("^[0-9]*$") && !loginId.matches("^[a-z]*$")) {
-			//ログインIDへ半角英数字以外が使われている
+			//ログインIDへ半角英数字以外が使われている時のエラー文表示
 			message = "ログインID入力には半角英数字のみ使用できます。";
 
 			//エラーメッセージをリクエストオブジェクトに保存

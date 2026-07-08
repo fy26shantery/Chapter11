@@ -133,34 +133,4 @@ public class DBManager extends SnsDAO {
 
 	}
 
-	public ShoutDTO getShoutsUser(int shoutsId) {
-
-		String sql = "SELECT * FROM shouts WHERE shoutsId=?";
-		ShoutDTO shout = null;
-
-		try (Connection conn = getConnection()) {
-
-			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-				pstmt.setInt(1, shoutsId);
-
-				try (ResultSet rset = pstmt.executeQuery()) {
-
-					if (rset.next()) {
-
-						shout = new ShoutDTO();
-						shout.setShoutsId(rset.getInt(1));
-						shout.setUserName(rset.getString(2));
-						shout.setIcon(rset.getString(3));
-						shout.setDate(rset.getString(4));
-						shout.setWriting(rset.getString(5));
-					}
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return shout;
-
-	}
 }
