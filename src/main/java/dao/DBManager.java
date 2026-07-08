@@ -61,7 +61,7 @@ public class DBManager extends SnsDAO {
 						shout.setShoutsId(rset.getInt("shoutsId"));
 						shout.setUserName(rset.getString("userName"));
 						shout.setIcon(rset.getString("icon"));
-						shout.setDate(rset.getDate("date"));
+						shout.setDate(rset.getString("date"));
 						shout.setWriting(rset.getString("writing"));
 
 						list.add(shout);
@@ -77,35 +77,33 @@ public class DBManager extends SnsDAO {
 
 	// ログインユーザー情報と書き込み内容を受け取り、リストに追加する
 	public boolean setWriting(UserDTO user, String writing) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
+
+		//		Connection conn = null;
+		//		PreparedStatement pstmt = null;
 
 		boolean result = false;
-		try {
-			conn = getConnection();
-
+		try (Connection conn = getConnection()) {
 			// INSERT文の登録と実行
 			String sql = "INSERT INTO shouts(userName, icon, date, writing)VALUES(?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user.getUserName());
-			pstmt.setString(2, user.getIcon());
-			// 現在日時の取得と日付の書式指定
-			Calendar calender = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			pstmt.setString(3, sdf.format(calender.getTime()));
-			pstmt.setString(4, writing);
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			int cnt = pstmt.executeUpdate();
-			if (cnt == 1) {
-				// INSERT文の実行結果が1なら登録成功
-				result = true;
+				pstmt.setString(1, user.getUserName());
+				pstmt.setString(2, user.getIcon());
+				// 現在日時の取得と日付の書式指定
+				Calendar calendar = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//でっかい”H”だと24時間表記になる
+				pstmt.setString(3, sdf.format(calendar.getTime()));
+				pstmt.setString(4, writing);
+
+				int cnt = pstmt.executeUpdate();
+				if (cnt == 1) {
+					// INSERT文の実行結果が1なら登録成功
+					result = true;
+				}
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			// データベース切断処理
-			close(pstmt);
-			close(conn);
 		}
 
 		return result;

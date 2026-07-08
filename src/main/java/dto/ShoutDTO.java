@@ -1,12 +1,10 @@
 package dto;
 
-import java.sql.Date;
-
 public class ShoutDTO {
 	private int shoutsId;
 	private String userName; // ユーザー名
 	private String icon; // ユーザーアイコン
-	private Date date; // 書き込み日時
+	private String date; // 書き込み日時
 	private String writing; // 書き込み内容
 
 	public ShoutDTO() {
@@ -29,11 +27,11 @@ public class ShoutDTO {
 		this.icon = icon;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -45,7 +43,7 @@ public class ShoutDTO {
 		this.writing = writing;
 	}
 
-	public ShoutDTO(int shoutsId, String userName, String icon, Date date, String writing) {
+	public ShoutDTO(int shoutsId, String userName, String icon, String date, String writing) {
 		this.shoutsId = shoutsId;
 		this.userName = userName;
 		this.icon = icon;
