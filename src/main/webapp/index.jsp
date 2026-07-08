@@ -18,13 +18,13 @@
 	<form action="./login" method="post">
 		<table style="width: 400px" class="table container padding-y-5">
 			<tr>
-				<td class="color-main text-left">ログインIDとパルワードを入力してください</td>
+				<td colspan="2" class="text-left"><strong>ログインIDとパスワードを入力してください</strong></td>
 			</tr>
 			<tr>
 				<%-- ログインID入力欄の名前はloginId --%>
 				<td class="color-main text-left">ログインID</td>
 				<td class="text-left"><input class="form-control" type="text"
-				name="loginId" value="" size="20" /></td>
+				name="loginId" value="" size="20" autofocus /></td>
 			</tr>
 			<tr>
 				<%-- パスワード入力欄の名前はpassword --%>
