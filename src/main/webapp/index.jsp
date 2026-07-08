@@ -20,14 +20,14 @@
     		<table style="width: 400px" class="table container padding-y-5">
     
            <tr>
-           <td colspan="2" class ="text-left"> ログインIDとパスワードを入力してください</td>
+           <td colspan="2" class ="text-left"><strong>ログインIDとパスワードを入力してください</strong></td>
            
            </tr>
             <tr>
                 <%-- ログインID入力欄の名前はloginId --%>
                 <td class="color-main text-left">ログインID</td>
                 <td class="text-left">
-                    <input class="form-control" type="text" name="loginId" value="" size="20" />
+                    <input class="form-control" type="text" name="loginId" value="" size="20" autofocus />
                 </td>
             </tr>
 <!--            <tr>-->

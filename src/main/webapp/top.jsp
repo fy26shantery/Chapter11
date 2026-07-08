@@ -47,12 +47,28 @@
 <%-- action 属性にサーブレットを指定 --%>
 <form action="./bbs" method="post">
 <table class="table">
+<tr>
+           <td colspan="2" class ="text-left"><strong>今の気持ちを叫ぼう</strong></td>
+           
+           </tr>
 	<tr>
 		<%--今の気持ち入力欄の名前は　shout --%>
 		<td><input class="form-control" type="text" name="shout" value=""
 			size="60" placeholder="今の気持ちを叫ぼう" /></td>
 		<td><input class="btn btn-primary" type="submit" value="叫ぶ" /></td>
 	</tr>
+	
+	<c:if test="${requestScope.bbsAlert != null}">
+	<tr>
+	<td colspan="2" class="color-error text-left">
+	<c:out value="${requestScope.bbsAlert}" />
+	</td>
+	</tr>
+	</c:if>
+	
+	
+	
+	
 </table>
 </from>
 
@@ -78,7 +94,10 @@
 							<td>${shout.date}</td>
 						</tr>
 						<tr>
-							<td colspan="2"><textarea row="5" class="form-control">${shout.writing}</textarea>
+<!--							<td colspan="2"><textarea row="5" class="form-control">${shout.writing}</textarea>-->
+
+							<td colspan="2"><textarea row="5" class="form-control" readonly> <c:out value="${shout.writing}" /></textarea>
+								
 							</td>
 						</tr>
 					</table>

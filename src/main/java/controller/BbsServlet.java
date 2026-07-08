@@ -34,6 +34,13 @@ public class BbsServlet extends HttpServlet {
 		String writing = request.getParameter("shout");
 		RequestDispatcher dispatcher;
 
+		if (writing == null || writing.equals("")) {
+			request.setAttribute("bbsAlert", "叫びを入力してください");
+			dispatcher = request.getRequestDispatcher("top.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
 		// 書き込み内容があれば、リストに追加
 		if (!writing.equals("")) {
 			HttpSession session = request.getSession();
