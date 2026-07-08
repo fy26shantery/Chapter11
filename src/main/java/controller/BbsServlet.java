@@ -35,7 +35,7 @@ public class BbsServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 
 		// 書き込み内容があれば、リストに追加
-		if (!writing.equals("")) {
+		if (!writing.isBlank()) {
 			HttpSession session = request.getSession();
 			// セッションからログインユーザ情報を取得
 			UserDTO user = (UserDTO) session.getAttribute("user");
@@ -54,7 +54,7 @@ public class BbsServlet extends HttpServlet {
 			// リストをセッションに保存
 			session.setAttribute("shouts", list);
 		} else {
-			//叫びの入力がない場合
+			//叫びの入力がない場合alertを表示
 			String message = "入力してください";
 			request.setAttribute("alert", message);
 

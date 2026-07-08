@@ -43,22 +43,29 @@
 
 				</table>
 			</form>
-	
-	<%-- action 属性にサーブレットを指定 --%>
-	<h6 class="text-center">今の気持ちを叫ぼう</h6>
-	<form action="./bbs" method="post">
-		<table class="table">
-			<tr>
-				<%-- 今の気持ち入力欄の名前は shout --%>
-				<td><input class="form-control" type="text" name="shout"
-					value="" size="60" /></td>
-				<td><input class="btn" type="submit" value="叫ぶ" /></td>
-			</tr>
-		</table>
-	</form>
+
+			<%-- action 属性にサーブレットを指定 --%>
+			<h6 class="text-center">今の気持ちを叫ぼう</h6>
+			<form action="./bbs" method="post">
+				<table class="table">
+					<tr>
+						<%-- 今の気持ち入力欄の名前は shout --%>
+						<td><input class="form-control" type="text" name="shout"
+							value="" size="60" /></td>
+						<td><input class="btn" type="submit" value="叫ぶ" /></td>
+					</tr>
+					<c:if test="${requestScope.alert != null && requestScope.alert != ''}">
+						<tr>
+							<%-- リクエストスコープのalert の値を出力 --%>
+							<td colspan="2" class="color-error text-left">
+							<c:out value="${requestScope.alert }" /></td>
+						</tr>
+					</c:if>
+				</table>
+			</form>
 		</div>
 	</div>
-	
+
 
 
 	<%-- セッションスコープにあるArrayList型のオブジェクトを参照 --%>
@@ -66,25 +73,25 @@
 		type="java.util.ArrayList<dto.ShoutDTO>" />
 	<div class="padding-y-5">
 		<div style="width: 40%" class="container padding-y-5">
-		<h6 class="text-center">みんなの叫び</h6>
+			<h6 class="text-center">みんなの叫び</h6>
 			<%-- リストにある要素の数だけ繰り返し --%>
 			<c:forEach var="shout" items="${shouts }">
 				<table class="table table-striped table-bordered">
 					<tr>
 						<td rowspan="2" class="text-center"><span
 							class="${shout.icon } pe-3x pe-va"></span></td>
-		<td>${shout.userName }</td>
-		</tr>
-		<tr>
-		<td>${shout.date }</td>
-		</tr>
-		<tr>
-		<td colspan="2"><textarea rows="5" class="form-control">${shout.writing }</textarea>
-		</td>
-		</tr>
-		</table>
-		</c:forEach>
+						<td>${shout.userName }</td>
+					</tr>
+					<tr>
+						<td>${shout.date }</td>
+					</tr>
+					<tr>
+						<td colspan="2"><textarea rows="5" class="form-control" tabindex="-1" readonly>${shout.writing }</textarea>
+						</td>
+					</tr>
+				</table>
+			</c:forEach>
 		</div>
-		</div>
+	</div>
 </body>
 </html>
