@@ -80,19 +80,18 @@ public class DBManager extends SnsDAO {
 	public boolean setWriting(UserDTO user, String writing) {
 		//		Connection conn = null;
 		//		PreparedStatement pstmt = null;
-
+		// INSERT文の登録と実行
+		String sql = "INSERT INTO shouts(userName, icon, date, writing) VALUES(?, ?, ?, ?)";
 		boolean result = false;
-		try {
-			Connection conn = getConnection();
+		try (
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			// INSERT文の登録と実行
-			String sql = "INSERT INTO shouts(userName, icon, date, writing) VALUES(?, ?, ?, ?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getUserName());
 			pstmt.setString(2, user.getIcon());
 			// 現在日時の取得と日付の書式指定
 			Calendar calender = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			pstmt.setString(3, sdf.format(calender.getTime()));
 			pstmt.setString(4, writing);
 
