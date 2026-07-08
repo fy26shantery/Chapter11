@@ -13,13 +13,15 @@
 <link rel="stylesheet" href="css/helper.css">
 </head>
 <body>
-	<%--セッションスコープにある　UserDTO型のオブジェクトを参照 --%>
+	<h2 class="bg-success padding-y-5 text-center"><strong>Shouter<i class=icon-speaker></i></strong></h2>
+	<%--セッションスコープにある UserDTO型のオブジェクトを参照 --%>
 	<jsp:useBean id="user" scope="session" type="dto.UserDTO" />
 	<div class="padding-y-5">
 		<div style="width: 40%" class="container padding-y-5">
 			<%-- action 属性にサーブレットを指定 --%>
 			<form action="./logout" method="post">
 				<table class="table table-bordered">
+				<h5 class="text-center">ログインユーザ情報</h5>
 					<tr>
 						<td rowspan="2" class="text-center"><span class="${user.icon} pe-3x pe-va"></span></td>
 						<td width="256">${user.userName}</td>
@@ -34,15 +36,18 @@
 	</div>
 	
 	<%-- action 属性にサーブレットを指定 --%>
-	<form action="./bbs" method="post">
-		<table class="table">
-			<tr>
+	<div class="padding-y-5">
+		<form action="./bbs" method="post">
+			<h3 class="text-center">今の気持ちを叫ぼう</h3>
+			<table class="table container padding-y-5">
+				<tr>
 				<%-- 今の気持ち入力欄の名前は shout --%>
 				<td><input class="form-control" type="text" name="shout" value="" size="60" /></td>
 				<td><input class="btn" type="submit" value="叫ぶ" /></td>
-			</tr>
-		</table>
-	</form>
+				</tr>
+			</table>
+		</form>
+	</div>
 	
 	
 	<%-- セッションスコープにあるArrayList型のオブジェクトを参照 --%>
@@ -50,10 +55,11 @@
 	
 	<%--listの書き方はこれがいいらしい
 	単なる設定の文字」として処理するため、
-	< > が入っているとパニックを起こしてエラーになってしまいます。--%>
+	< > が入っているとパニックを起こしてエラーになってしまいます。・・そんなことはありませんでした--%>
 	
 	<div class="padding-y-5">
 		<div style="width: 40%" class="container padding-y-5">
+			<h3>みんなの叫び</h3>
 			<%-- リストにある要素の数だけ繰り返し --%>
 			<c:forEach var="shout" items="${shouts}">
 				<table class="table table-striped table-bordered">

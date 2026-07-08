@@ -13,9 +13,13 @@
 <link rel="stylesheet" href="css/helper.css">
 </head>
 <body>
+	<h2 class="bg-success padding-y-5 text-center"><strong>Shouter<i class=icon-speaker></i></strong></h2>
 	<%-- action 属性にサーブレットを指定 --%>
 	<form action="./login" method="post">
-		<table style="width: 400px" class="table">
+		<table style="width: 400px" class="table container padding-y-5">
+			<tr>
+				<td class="color-main text-left">ログインIDとパルワードを入力してください</td>
+			</tr>
 			<tr>
 				<%-- ログインID入力欄の名前はloginId --%>
 				<td class="color-main text-left">ログインID</td>

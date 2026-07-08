@@ -91,6 +91,7 @@ public class DBManager extends SnsDAO {
 				pstmt.setString(2, user.getIcon());
 				// 現在日時の取得と日付の書式指定
 				Calendar calendar = Calendar.getInstance();
+				//SimpleDateFormat 日付のデータを、見やすい文字（String）の形に変換
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//でっかい”H”だと24時間表記になる
 				pstmt.setString(3, sdf.format(calendar.getTime()));
 				pstmt.setString(4, writing);

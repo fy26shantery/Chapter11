@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public LoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -51,17 +51,16 @@ public class LoginServlet extends HttpServlet {
 
 		RequestDispatcher dispatcher = null;
 		String message = null;
-
 		if (loginId.equals("") || password.equals("") /*|| userName.equals("")*/) {
 			// ログインID かパスワードかユーザ名どれか、もしくは双方未入力なら
 			message = "ログインIDとパスワード、ユーザ名は必須入力です";
-
 			// エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert", message);
 
 			// index.jsp に処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
+
 		} else {
 			// ログイン認証を行い、ユーザー情報を取得
 			DBManager dbm = new DBManager();
@@ -78,18 +77,32 @@ public class LoginServlet extends HttpServlet {
 
 				// 処理の転送先をtop.jspに指定
 				dispatcher = request.getRequestDispatcher("top.jsp");
+
 			} else {
 				// ユーザー情報が取得できない場合
 				// エラーメッセージをリクエストオブジェクトに保存
-				message = "ログインIDまたはパスワードが違います";
-				request.setAttribute("alert", message);
+				if (!loginId.matches("[0-9a-zA-Z]")) {
 
-				// 処理の転送先をindex.jspに指定
-				dispatcher = request.getRequestDispatcher("index.jsp");
+					message = "パスワードは半角英数字で入力してください";
+					// エラーメッセージをリクエストオブジェクトに保存
+					request.setAttribute("alert", message);
+
+					// index.jsp に処理を転送
+					dispatcher = request.getRequestDispatcher("index.jsp");
+					//				dispatcher.forward(request, response);
+				} else {
+
+					message = "ログインIDまたはパスワードが違います";
+					request.setAttribute("alert", message);
+
+					// 処理の転送先をindex.jspに指定
+					dispatcher = request.getRequestDispatcher("index.jsp");
+				}
 			}
 			// 処理を転送
 			dispatcher.forward(request, response);
 		}
 
 	}
+
 }
