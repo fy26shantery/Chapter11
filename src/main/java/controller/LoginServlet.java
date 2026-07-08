@@ -5,19 +5,20 @@ import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import dao.DataManager;
+import dao.DBManager;
 import dto.ShoutDTO;
 import dto.UserDTO;
 
 /**
  * Servlet implementation class LoginServlet
  */
-//@WebServlet("/login")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,13 +48,12 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//送信情報の取得
 		String loginId = request.getParameter("loginId");
-		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 
 		RequestDispatcher dispatcher = null;
 		String message = null;
 
-		if (loginId.equals("") || userName.equals("") || password.equals("")) {
+		if (loginId.equals("") || password.equals("")) {
 			//ログインIDかパスワード、ユーザ名、どれかが一つでも未入力なら
 			message = "ログインIDとユーザ名・パスワードは必須入力です";
 
@@ -65,12 +65,12 @@ public class LoginServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			//ログイン認証を行い、ユーザ情報を取得
-			DataManager dbm = new DataManager();
-			UserDTO user = dbm.getLoginUser(loginId, userName, password);
+			DBManager dbm = new DBManager();
+			UserDTO user = dbm.getLoginUser(loginId, password);
 
 			if (user != null) {
 				//ユーザ情報を取得できたら、書き込み内容リストを取得
-				ArrayList<ShoutDTO> list = dbm.getShoutList();
+				ArrayList<ShoutDTO> list = dbm.getShoutsList();
 				HttpSession session = request.getSession();
 
 				//ログインユーザ情報、書き込み内容リストとしてセッションに保存
