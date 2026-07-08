@@ -27,12 +27,12 @@
 			<td class="text-left"><input class="form-control" type="text"
 			 name="loginId" value="" size="20" /></td>
 		</tr>
-		<tr>
-			<%-- ユーザー名入力欄の名前はloginId --%>
-			<td class="color-main text-left">ユーザー名</td>
-			<td class="text-left"><input class="form-control" type="text"
-			 name="userName" value="" size="20" /></td>
-		</tr>
+<!--		<tr>-->
+<!--			<%-- ユーザー名入力欄の名前はloginId --%>-->
+<!--			<td class="color-main text-left">ユーザー名</td>-->
+<!--			<td class="text-left"><input class="form-control" type="text"-->
+<!--			 name="userName" value="" size="20" /></td>-->
+<!--		</tr>-->
 		<tr>
 			<%-- パスワード入力欄の名前はpassword --%>
 			<td class="color-main text-left">パスワード</td>
