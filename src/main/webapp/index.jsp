@@ -51,7 +51,7 @@
             </tr>
             
             <%-- リクエストスコープにalertがあれば --%>
-            <c:if test="${requestScope.alert != null && requestScope.alert != ' '}">
+            <c:if test="${requestScope.alert != null && requestScope.alert != ''}">
                 <tr>
                     <%-- リクエストスコープの alert の値を出力 --%>
                     <td colspan="2" class="color-error text-left">
