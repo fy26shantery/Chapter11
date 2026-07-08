@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import dto.ShoutDTO;
 import dto.UserDTO;
@@ -54,8 +53,8 @@ public class DBManager extends SnsDAO {
 	}
 
 	//shoutsテーブルのデータを全件取得
-	public List<ShoutDTO> getAllShouts() {
-		List<ShoutDTO> list = new ArrayList<>();
+	public ArrayList<ShoutDTO> getAllShouts() {
+		ArrayList<ShoutDTO> list = new ArrayList<>();
 		String sql = "SELECT * FROM shouts";
 
 		try (Connection conn = getConnection();
@@ -69,7 +68,7 @@ public class DBManager extends SnsDAO {
 				dto.setShoutsId(rset.getInt("shoutsId"));
 				dto.setUserName(rset.getString("userName"));
 				dto.setIcon(rset.getString("icon"));
-				dto.setDate(rset.getDate("date")); //時、分、秒まで図れるgetTimestamp
+				dto.setDate(rset.getTimestamp("date")); //時、分、秒まで図れるgetTimestamp
 				dto.setWriting(rset.getString("writing"));
 				list.add(dto);
 			}
@@ -84,24 +83,28 @@ public class DBManager extends SnsDAO {
 		boolean result = false;
 		String sql = "INSERT INTO shouts(userName, icon, date,writing) VALUES(?,?,?,?)";
 
-		try (
-				Connection conn = getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rset = pstmt.executeQuery()) {
+		try (Connection conn = getConnection()) {
 
-			pstmt.setString(1, user.getUserName());
-			pstmt.setString(2, user.getIcon());
+			try (
+					PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			Calendar calendar = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			pstmt.setString(3, sdf.format(calendar.getTime()));
-			pstmt.setString(4, writing);
+				pstmt.setString(1, user.getUserName());
+				pstmt.setString(2, user.getIcon());
 
-			int cnt = pstmt.executeUpdate();
-			if (cnt == 1) {
-				result = true;
+				Calendar calendar = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				pstmt.setString(3, sdf.format(calendar.getTime()));
+				pstmt.setString(4, writing);
+
+				int cnt = pstmt.executeUpdate();
+				if (cnt == 1) {
+					result = true;
+				}
 			}
-		} catch (SQLException e) {
+
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 		}
 		return result;

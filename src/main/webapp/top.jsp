@@ -18,7 +18,7 @@
 	
 	<span class="${user.icon}"></span>
 		<form action="./logout" method="post">
-			<table class="table table-boedered">
+			<table class="table table-bordered">
 				<tr>
 					<td rowspan="2" class="text-center"><span
 						class="${user.icon} pe-3x pe-va"></span></td>
@@ -76,7 +76,6 @@
 				</c:forEach>
 	</div>
 </div>
-</head>
 
 
 

@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 
 			if (user != null) {
 				// ユーザー情報を取得できたら、書き込み内容リストを取得
-				List<ShoutDTO> list = dbm.getAllShouts();
+				ArrayList<ShoutDTO> list = dbm.getAllShouts();
 				HttpSession session = request.getSession();
 
 				// ログインユーザー情報、書き込み内容リストとしてセッションに保存
