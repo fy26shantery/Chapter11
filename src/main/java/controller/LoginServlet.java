@@ -36,7 +36,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		String message = null;
 		//InputCheck check = new InputCheck();
 
-		if (loginId.equals("") || password.equals("")) {
+		if (loginId == null || password == null || loginId.isBlank() || password.isBlank()) {
 			//ログインIDかパスワード、ユーザ名、どれかが一つでも未入力なら
 			message = "ログインIDとユーザ名・パスワードは必須入力です";
 

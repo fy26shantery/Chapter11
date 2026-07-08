@@ -86,7 +86,7 @@
 						<td>${shout.date }</td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea rows="5" class="form-control" tabindex="-1" readonly>${shout.writing }</textarea>
+						<td colspan="2"><textarea rows="5" class="form-control" tabindex="-1" disabled>${shout.writing }</textarea>
 						</td>
 					</tr>
 				</table>
