@@ -55,7 +55,7 @@ public class DBManager extends SnsDAO {
 	//shoutsテーブルのデータを全件取得
 	public ArrayList<ShoutDTO> getAllShouts() {
 		ArrayList<ShoutDTO> list = new ArrayList<>();
-		String sql = "SELECT * FROM shouts";
+		String sql = "SELECT * FROM shouts ORDER BY date DESC";
 
 		try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -68,7 +68,7 @@ public class DBManager extends SnsDAO {
 				dto.setShoutsId(rset.getInt("shoutsId"));
 				dto.setUserName(rset.getString("userName"));
 				dto.setIcon(rset.getString("icon"));
-				dto.setDate(rset.getTimestamp("date")); //時、分、秒まで図れるgetTimestamp
+				dto.setDate(rset.getString("date")); //時、分、秒まで図れるgetTimestamp
 				dto.setWriting(rset.getString("writing"));
 				list.add(dto);
 			}

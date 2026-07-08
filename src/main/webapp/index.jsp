@@ -7,15 +7,22 @@
 <link rel="stylesheet" href="./css/skyblue.css">
 	<link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 	<link rel="stylesheet" href="./css/helper.css">
-	
-	<title>ログイン画面</title>
-	    <h2>ログイン</h2>
-	
 </head>
+	<body>
+	
+	    <h2 class="bg-success padding-y-5 text-center"><strong>Shouter</strong>
+	    <i class="icon-speaker"></i></h2>
+	<%-- action 属性にサーブレットを指定 --%>
+	
 
     <%-- action 属性にサーブレットを指定 --%>
     <form action="./login" method="post">
-        <table style="width: 400px" class="table" border="1">
+    		<table style="width: 400px" class="table container padding-y-5">
+    
+           <tr>
+           <td colspan="2" class ="text-left"> ログインIDとパスワードを入力してください</td>
+           
+           </tr>
             <tr>
                 <%-- ログインID入力欄の名前はloginId --%>
                 <td class="color-main text-left">ログインID</td>

@@ -53,9 +53,9 @@ public class LoginServlet extends HttpServlet {
 		String message = null;
 
 		//		if (loginId.equals("") || userName.equals("") || password.equals("")) {
-		if (loginId.equals("") || password.equals("")) {
-
-		}
+		//		if (loginId.equals("") || password.equals("")) {
+		//
+		//		}
 		if (loginId.equals("") || password.equals("")) {
 
 			// ログインID かパスワードどちらか、もしくは全部未入力なら
@@ -67,6 +67,14 @@ public class LoginServlet extends HttpServlet {
 			// index.jsp に処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
+		} else if (!loginId.matches("^[a-zA-Z0-9]+$")) {
+			message = "ログインIDは半角英数字のみで入力してください";
+			request.setAttribute("alert", message);
+
+			// index.jsp に処理を転送
+			dispatcher = request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
+
 		} else {
 			// ログイン認証を行い、ユーザー情報を取得
 			DBManager dbm = new DBManager();

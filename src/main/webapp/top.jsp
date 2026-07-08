@@ -8,12 +8,21 @@
 	<link rel="stylesheet" href="./css/skyblue.css">
 	<link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 	<link rel="stylesheet" href="./css/helper.css">
-]
 </head>
-<body>
+	<body>
+	
+	    <h2 class="bg-success padding-y-5 text-center"><strong>Shouter</strong>
+	    <i class="icon-speaker"></i></h2>
+	<%-- action 属性にサーブレットを指定 --%>
+    		<table style="width: 400px" class="table container padding-y-5">
 
 <%--　セッションスコープにあるUserDTO型オブジェクトを参照 --%>
 <jsp:useBean id="user" scope="session" type="dto.UserDTO" />
+<tr>
+           <td colspan="2" class ="text-left"> ログインユーザー情報</td>
+           
+           </tr>
+
 	<div class="d-flex aligin-items-center">
 	
 	<span class="${user.icon}"></span>
