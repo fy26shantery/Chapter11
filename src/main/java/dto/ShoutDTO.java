@@ -1,0 +1,63 @@
+package dto;
+
+import java.sql.Date;
+
+public class ShoutDTO {
+	private int shoutsId;
+	private String userName; // ユーザー名
+	private String icon; // ユーザーアイコン
+	private Date date; // 書き込み日時
+	private String writing; // 書き込み内容
+
+	public ShoutDTO() {
+
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getWriting() {
+		return writing;
+	}
+
+	public void setWriting(String writing) {
+		this.writing = writing;
+	}
+
+	public ShoutDTO(int shoutsId, String userName, String icon, Date date, String writing) {
+		this.shoutsId = shoutsId;
+		this.userName = userName;
+		this.icon = icon;
+		this.date = date;
+		this.writing = writing;
+	}
+
+	public int getShoutsId() {
+		return shoutsId;
+	}
+
+	public void setShoutsId(int shoutsId) {
+		this.shoutsId = shoutsId;
+	}
+}
