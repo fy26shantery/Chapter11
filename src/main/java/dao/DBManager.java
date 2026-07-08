@@ -51,7 +51,9 @@ public class DBManager extends SnsDAO {
 		ArrayList<ShoutDTO> list = new ArrayList<ShoutDTO>();
 
 		try (Connection conn = getConnection()) {
+
 			try (Statement pstmt = conn.createStatement()) {
+
 				String sql = "SELECT * FROM shouts ORDER BY date DESC";
 
 				try (ResultSet rset = pstmt.executeQuery(sql);) {
@@ -88,7 +90,7 @@ public class DBManager extends SnsDAO {
 				pstmt.setString(2, user.getIcon());
 				// 現在日時の取得と日付の書式指定
 				Calendar calender = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				pstmt.setString(3, sdf.format(calender.getTime()));
 				pstmt.setString(4, writing);
 
