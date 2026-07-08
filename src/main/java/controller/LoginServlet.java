@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (!loginId.matches("^[0-9]*$") || !loginId.matches("^[a-z]*$")) {
+		} else if (!loginId.matches("^[0-9]*$") && !loginId.matches("^[a-z]*$")) {
 			//ログインIDへ半角英数字以外が使われている
 			message = "ログインID入力には半角英数字のみ使用できます。";
 
