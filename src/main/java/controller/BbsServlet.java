@@ -35,12 +35,12 @@ public class BbsServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 
 		// 書き込み内容があれば、リストに追加
-		if (!writing.equals("")) {
+		if (!writing.isBlank()) {//からの時や空白の時にエラーが出ます
 			HttpSession session = request.getSession();
 			// セッションからログインユーザ情報を取得
 			UserDTO user = (UserDTO) session.getAttribute("user");
 
-			// １度だけ DataManager オブジェクトを生成
+			// １度だけ DBManager オブジェクトを生成
 			if (dbm == null) {
 				dbm = new DBManager();
 			}
@@ -53,6 +53,13 @@ public class BbsServlet extends HttpServlet {
 
 			// リストをセッションに保存
 			session.setAttribute("shouts", list);
+
+			// top.jsp に処理を転送
+			//			dispatcher = request.getRequestDispatcher("top.jsp");
+			//			dispatcher.forward(request, response);
+		} else {
+			String message = "文字を入力してください";
+			request.setAttribute("alert", message);
 		}
 
 		// top.jsp に処理を転送
