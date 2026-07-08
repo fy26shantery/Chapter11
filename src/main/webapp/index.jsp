@@ -31,7 +31,7 @@
 						<%-- ログインIDの入力欄の名前はloginId --%>
 						<td class="color-main text-left">ログインID</td>
 						<td class="text-left"><input class="form-control" type="text"
-							name="loginId" value="" size="20" /></td>
+							name="loginId" value="" size="20" autofocus/></td>
 					</tr>
 					
 					<tr>
