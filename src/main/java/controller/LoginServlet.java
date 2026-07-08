@@ -62,6 +62,18 @@ public class LoginServlet extends HttpServlet {
 			//index.jspに処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
+
+		} else if (!loginId.matches("^[0-9]*$") || !loginId.matches("^[a-z]*$")) {
+			//ログインIDへ半角英数字以外が使われている
+			message = "ログインID入力には半角英数字のみ使用できます。";
+
+			//エラーメッセージをリクエストオブジェクトに保存
+			request.setAttribute("alert", message);
+
+			//index.jspに処理を転送
+			dispatcher = request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
+
 		} else {
 			//ログイン認証を行い、ユーザー情報を取得
 			DBManager dbm = new DBManager();
@@ -78,6 +90,7 @@ public class LoginServlet extends HttpServlet {
 
 				//宛先をtop.jspに
 				dispatcher = request.getRequestDispatcher("top.jsp");
+
 			} else {
 				//ユーザー情報を取得できない時
 				//エラーメッセージをリクエストオブジェクトに保存
