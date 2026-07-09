@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ログイン画面</title>
 	<link rel="stylesheet" href="./css/skyblue.css">
 	<link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 	<link rel="stylesheet" href="./css/helper.css">
@@ -28,12 +28,7 @@
 			<td class="text-left"><input class="form-control" type="text"
 			 name="loginId" autofocus value="" size="20" /></td>
 		</tr>
-<!--		<tr>-->
-<!--			<%-- ユーザー名入力欄の名前はloginId --%>-->
-<!--			<td class="color-main text-left">ユーザー名</td>-->
-<!--			<td class="text-left"><input class="form-control" type="text"-->
-<!--			 name="userName" value="" size="20" /></td>-->
-<!--		</tr>-->
+
 		<tr>
 			<%-- パスワード入力欄の名前はpassword --%>
 			<td class="color-main text-left">パスワード</td>
@@ -45,12 +40,18 @@
 			type="submit" value="ログイン" /></td>
 		</tr>
 		<%-- リクエストスコープにalertがあれば --%>
-		<c:if
-		test="${requestScope.alert != null && requestScope.alert != '' }">
+		<c:if test="${requestScope.alert1 != null && requestScope.alert1 != '' }">
+			<tr>
+				<%-- リクエストスコープにalertの値を出力  --%>
+				<td colspan="2" class="color-error text-left"><c:out
+				value="${requestScope.alert1}" /></td>
+			</tr>
+		</c:if>
+		<c:if test="${requestScope.alert2 != null && requestScope.alert2 != '' }">		
 			<tr>
 				<%-- リクエストスコープにalertの値を出力 --%>
 				<td colspan="2" class="color-error text-left"><c:out
-				value="${requestScope.alert}" /></td>
+				value="${requestScope.alert2}" /></td>
 			</tr>
 		</c:if>
 	</table>

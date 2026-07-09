@@ -40,7 +40,7 @@ public class BbsServlet extends HttpServlet {
 		String message = null;
 
 		// 書き込み内容があれば、リストに追加
-		if (!writing.equals("")) {
+		if (!(writing == null || writing.equals(""))) {
 			HttpSession session = request.getSession();
 			// セッションからログインユーザ情報を取得
 			UserDTO user = (UserDTO) session.getAttribute("user");

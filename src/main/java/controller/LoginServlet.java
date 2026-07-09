@@ -33,31 +33,42 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		RequestDispatcher dispatcher = null;
-		String message = null;
+		String message1 = null;
+		String message2 = null;
+		//String message3 = null;
 
-		if (loginId.equals("") || password.equals("")) {
-			//ログインIDかパスワードどちらか、もしくは双方未入力なら
-			message = "ログインIDとユーザー名とパスワードは必須入力です";
+		if (loginId == null || loginId.equals("") || password == null || password.equals("")) {
+			//ログインID未入力
+			message1 = "ログインID、パスワードは必須入力です";
 
 			//エラーメッセージをリクエストオブジェクトに保存
-			request.setAttribute("alert", message);
+			request.setAttribute("alert1", message1);
 
 			//index.jspに処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
+		}
 
-		} else if (!loginId.matches("^[0-9]*$") && !loginId.matches("^[a-z]*$")) {
+		if (!loginId.matches("^[0-9a-z]*$")) {
 			//ログインIDへ半角英数字以外が使われている時のエラー文表示
-			message = "ログインID入力には半角英数字のみ使用できます。";
+			message2 = "ログインID入力には半角英数字のみ使用できます。";
 
 			//エラーメッセージをリクエストオブジェクトに保存
-			request.setAttribute("alert", message);
+			request.setAttribute("alert2", message2);
 
 			//index.jspに処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
 
-		} else {
+		} else if (!password.matches("^[0-9a-z]*$")) {
+			//ログインIDへ半角英数字以外が使われている時のエラー文表示
+			message2 = "パスワード入力には半角英数字のみ使用できます。";
+
+			//エラーメッセージをリクエストオブジェクトに保存
+			request.setAttribute("alert2", message2);
+
+			//index.jspに処理を転送
+			dispatcher = request.getRequestDispatcher("index.jsp");
+
+		} else if (!(loginId.equals("") || password.equals(""))) {
 			//ログイン認証を行い、ユーザー情報を取得
 			DBManager dbm = new DBManager();
 			UserDTO user = dbm.getLoginUser(loginId, password);
@@ -77,14 +88,14 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				//ユーザー情報を取得できない時
 				//エラーメッセージをリクエストオブジェクトに保存
-				message = "ログインID、ユーザー名のどちらかが違います";
-				request.setAttribute("alert", message);
+				message1 = "ログインID、パスワードが違います";
+				request.setAttribute("alert2", message2);
 
 				//宛先を書く
 				dispatcher = request.getRequestDispatcher("index.jsp");
 			}
-			dispatcher.forward(request, response);
-
 		}
+		dispatcher.forward(request, response);
+
 	}
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>叫びルーム</title>
 <link rel="stylesheet" href="./css/skyblue.css">
 <link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 <link rel="stylesheet" href="./css/helper.css">
@@ -84,7 +84,7 @@
 							</tr>
 							<tr>
 							<%-- 表示領域を入力不可にする --%>
-								<td colspan="2"><textarea rows="5" class="form-control" readonly>${shout.writing}</textarea></td>
+								<td colspan="2"><p rows="5" class="form-control">${shout.writing}</p></td>
 							</tr>
 						</table>
 					</c:forEach>

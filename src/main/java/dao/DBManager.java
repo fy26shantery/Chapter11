@@ -107,30 +107,4 @@ public class DBManager extends SnsDAO {
 		return result;
 	}
 
-	//ShoutsテーブルのshoutsIdをアレイリストにいれる
-	public ArrayList<Integer> countId() {//ArrayListの中身にintを入れたいときはinteger型にする
-
-		String sql = "SELECT * FROM shouts ";//全検索SQL文
-		ArrayList<Integer> count = new ArrayList<Integer>();
-
-		try (Connection conn = getConnection()) {
-
-			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-				try (ResultSet rset = pstmt.executeQuery()) {
-
-					while (rset.next()) {
-
-						count.add(rset.getInt("shoutsId"));
-
-					}
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return count;//リストを返す
-
-	}
-
 }
