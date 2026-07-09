@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="./css/skyblue.css">
 <link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 <link rel="stylesheet" href="./css/helper.css">
+<link rel="stylesheet" href="./css/mymade.css">
 
 <title>Insert title here</title>
 </head>
@@ -40,10 +41,19 @@
 						<td class="text-left"><input class="form-control"
 							type="password" name="password" value="" size="20" /></td>
 					</tr>
+					</table>
+					<table style="width: 400px; margin: 0 auto;" class="table">
 					<tr>
-						<td colspan="2" class="text-right"><input class="btn"
+						<td colspan="2" class="text-center" ><input class="btn"
 							type="submit" value="ログイン" /></td>
+						</form>
+						<form action="userRegistInput.jsp" method="post">
+							
+							<td colspan="2" class="text-center"><input class="btn"
+								type="submit" value="新規登録" /></td>
+						</form>
 					</tr>
+					</table>
 					<%-- リクエストスコープにalert1があれば --%>
 					<c:if
 						test="${requestScope.alert1 != null && requestScope.alert1 != ''}">
@@ -61,8 +71,7 @@
 									value="${requestScope.alert2 }" /></td>
 						</tr>
 					</c:if>
-				</table>
-			</form>
+				
 		</div>
 	</div>
 </body>
