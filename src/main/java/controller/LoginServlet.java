@@ -52,19 +52,19 @@ public class LoginServlet extends HttpServlet {
 		String message = null;
 		String message2 = null;
 
-		// 1. ログインIDのチェック（結果は message に入れる）
+		//ログインIDのチェック（結果は message に入れる）
 		if (loginId == null || loginId.equals("")) {
 			message = "ログインIDを入力してください。";
 		} else if (!loginId.matches("^[a-zA-Z0-9]+$")) {
 			message = "ログインIDは半角英数字のみで入力してください。";
 		}
 
-		// 2. パスワードのチェック（結果は message2 に入れる）
+		//パスワードのチェック（結果は message2 に入れる）
 		if (password == null || password.equals("")) {
 			message2 = "パスワードを入力してください。";
 		}
 
-		// 3. どちらか片方でもエラーがあれば、この時点で index.jsp に戻す
+		//どちらか片方でもエラーがあれば、この時点で index.jsp に戻す
 		if (message != null || message2 != null) {
 			//alert と alert2）で保存して上書きを防ぐ
 			if (message != null) {
