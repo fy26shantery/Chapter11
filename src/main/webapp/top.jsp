@@ -87,12 +87,10 @@
 						<td>${shout.date }</td>
 					</tr>
 					<tr>
-						<td colspan="2" rowspan="5" class="form-control">${shout.writing }</td>
+						<td colspan="2">  <p rows="5" class="form-control">${shout.writing }</p></td>
 					</tr>
-					<tr><td></td></tr>
-					<tr><td></td></tr>
-					<tr><td></td></tr>
-					<tr><td></td></tr>
+					
+					
 				</table>
 			</c:forEach>
 		</div>

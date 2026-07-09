@@ -51,7 +51,6 @@ public class LoginServlet extends HttpServlet {
 
 		}
 
-		//直下条件式に当てはまるときは上で処理をしているため対応不要
 		if (!(loginId == null || password == null)) { //nullチェック
 			if (!(loginId.matches("^[0-9a-zA-Z]*$") && password.matches("^[0-9a-zA-Z]*$"))) {
 
@@ -60,6 +59,9 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("alert2", message2);
 				dispatcher = request.getRequestDispatcher("index.jsp");
 
+				/*未入力の場合は上部で処理をしており、
+				 * 以下のユーザ認証は必ず通らないため
+					未入力を判断する条件文で抜ける*/
 			} else if (!(loginId.isBlank() || password.isBlank())) {
 				//ログイン認証を行い、ユーザ情報を取得
 				DBManager dbm = new DBManager();
