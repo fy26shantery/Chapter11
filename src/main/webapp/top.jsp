@@ -13,15 +13,21 @@
 <link rel="stylesheet" href="css/helper.css">
 </head>
 <body>
-	<h2 class="bg-success padding-y-5 text-center"><strong>Shouter<i class=icon-speaker></i></strong></h2>
+<%--直接topにログインされたときにindex.jspに返してあげたい --%>
+<c:if test="${empty sessionScope.user}">
+    <c:set var="alert" value="ログインしてください" scope="request" />
+    <jsp:forward page="index.jsp" />
+</c:if>
+
+	<h2 class="bg-success padding-y-5 text-center"><strong>Shouter <span class=icon-speaker></span></strong></h2>
 	<%--セッションスコープにある UserDTO型のオブジェクトを参照 --%>
 	<jsp:useBean id="user" scope="session" type="dto.UserDTO" />
 	<div class="padding-y-5">
 		<div style="width: 40%" class="container padding-y-5">
+		<h5 class="text-center">ログインユーザ情報</h5>
 			<%-- action 属性にサーブレットを指定 --%>
 			<form action="./logout" method="post">
 				<table class="table table-bordered">
-				<h5 class="text-center">ログインユーザ情報</h5>
 					<tr>
 						<td rowspan="2" class="text-center"><span class="${user.icon} pe-3x pe-va"></span></td>
 						<td width="256">${user.userName}</td>

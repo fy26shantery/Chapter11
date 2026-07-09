@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/helper.css">
 </head>
 <body>
-	<h2 class="bg-success padding-y-5 text-center"><strong>Shouter<i class=icon-speaker></i></strong></h2>
+	<h2 class="bg-success padding-y-5 text-center"><strong>Shouter <span class=icon-speaker></i></span></h2>
 	<%-- action 属性にサーブレットを指定 --%>
 	<form action="./login" method="post">
 		<table style="width: 400px" class="table container padding-y-5">
@@ -41,6 +41,13 @@
 				<tr>
 					<%-- リクエストスコープの alert の値を出力 --%>
 					<td colspan="2" class="color-error text-left"><c:out value="${requestScope.alert}" /></td>
+				</tr>
+			</c:if>
+			<c:if test="${requestScope.alert2 != null && requestScope.alert2 != ''}">
+				<tr>
+					<%-- リクエストスコープの alert2 の値を出力 --%>
+					<%-- 片方だけ未入力の場合 --%>
+					<td colspan="2" class="color-error text-left"><c:out value="${requestScope.alert2}" /></td>
 				</tr>
 			</c:if>
 		</table>
