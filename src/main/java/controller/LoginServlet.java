@@ -62,14 +62,13 @@ public class LoginServlet extends HttpServlet {
 
 			//index.jspに処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
+
 		} else if (!(loginId.matches("^[0-9a-zA-Z]+$") && password.matches("^[0-9a-zA-Z]+$"))) {
 
 			//半角英数字のみ
 			message = "半角英数字で入力してください";
 			request.setAttribute("alert", message);
 			dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
 
 		} else {
 			//ログイン認証を行い、ユーザ情報を取得
