@@ -34,7 +34,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -49,59 +50,58 @@ public class LoginServlet extends HttpServlet {
 
 		RequestDispatcher dispatcher = null;
 		String message = null;
+		String message2 = null;
 
-		//		if (loginId.equals("") || userName.equals("") || password.equals("")) {
-		//		if (loginId.equals("") || password.equals("")) {
-		//
-		//		}
-		if (loginId.equals("") || password.equals("")) {
-
-			// ログインID かパスワードどちらか、もしくは全部未入力なら
-			message = "ログインIDとパスワードは必須入力です";
-
-			// エラーメッセージをリクエストオブジェクトに保存
-			request.setAttribute("alert", message);
-
-			// index.jsp に処理を転送
-			dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
+		// 1. ログインIDのチェック（結果は message に入れる）
+		if (loginId == null || loginId.equals("")) {
+			message = "ログインIDを入力してください。";
 		} else if (!loginId.matches("^[a-zA-Z0-9]+$")) {
-			message = "ログインIDは半角英数字のみで入力してください";
-			request.setAttribute("alert", message);
+			message = "ログインIDは半角英数字のみで入力してください。";
+		}
 
-			// index.jsp に処理を転送
-			dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
+		// 2. パスワードのチェック（結果は message2 に入れる）
+		if (password == null || password.equals("")) {
+			message2 = "パスワードを入力してください。";
+		}
 
-		} else {
-			// ログイン認証を行い、ユーザー情報を取得
-			DBManager dbm = new DBManager();
-			//			UserDTO user = dbm.getLoginUser(loginId, userName, password);
-			UserDTO user = dbm.getLoginUser(loginId, password);
-
-			if (user != null) {
-				// ユーザー情報を取得できたら、書き込み内容リストを取得
-				ArrayList<ShoutDTO> list = dbm.getAllShouts();
-				HttpSession session = request.getSession();
-
-				// ログインユーザー情報、書き込み内容リストとしてセッションに保存
-				session.setAttribute("user", user);
-				session.setAttribute("shouts", list);
-
-				dispatcher = request.getRequestDispatcher("top.jsp");
-			} else {
-				// ユーザー情報が取得できない場合
-				// エラーメッセージをリクエストオブジェクトに保存
-				message = "ログインIDまたはパスワードが違います";
+		// 3. どちらか片方でもエラーがあれば、この時点で index.jsp に戻す
+		if (message != null || message2 != null) {
+			//alert と alert2）で保存して上書きを防ぐ
+			if (message != null) {
 				request.setAttribute("alert", message);
-
-				// 処理の転送先をindex.jspに指定
-				dispatcher = request.getRequestDispatcher("index.jsp");
+			}
+			if (message2 != null) {
+				request.setAttribute("alert2", message2);
 			}
 
-			// 処理を転送
+			// index.jsp に処理を転送して、ここで処理を終了(return)する
+			dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
+			return;
 		}
-	}
 
+		//認証処理（入力チェックがどちらも null の時だけ来る）
+		DBManager dbm = new DBManager();
+		UserDTO user = dbm.getLoginUser(loginId, password);
+
+		if (user != null) {
+			// ログイン成功：必要なデータをセッションに詰めて top.jspにいく
+			ArrayList<ShoutDTO> list = dbm.getAllShouts();
+			HttpSession session = request.getSession();
+
+			session.setAttribute("user", user);
+			session.setAttribute("shouts", list);
+
+			dispatcher = request.getRequestDispatcher("top.jsp");
+		} else {
+			// ログイン失敗：組み合わせが違う場合
+			message = "ログインIDまたはパスワードが違います。";
+			request.setAttribute("alert", message); // ここは片方（alert）だけ使う
+
+			dispatcher = request.getRequestDispatcher("index.jsp");
+		}
+
+		// 処理を転送
+		dispatcher.forward(request, response);
+	}
 }

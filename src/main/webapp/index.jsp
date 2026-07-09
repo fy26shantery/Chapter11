@@ -11,7 +11,7 @@
 	<body>
 	
 	    <h2 class="bg-success padding-y-5 text-center"><strong>Shouter</strong>
-	    <i class="icon-speaker"></i></h2>
+	    <span class="icon-speaker"></span></h2>
 	<%-- action 属性にサーブレットを指定 --%>
 	
 
@@ -56,6 +56,14 @@
                     <%-- リクエストスコープの alert の値を出力 --%>
                     <td colspan="2" class="color-error text-left">
                         <c:out value="${requestScope.alert}" />
+                    </td>
+                </tr>
+            </c:if>
+            <c:if test="${requestScope.alert2 != null && requestScope.alert2 != ''}">
+                <tr>
+                    <%-- リクエストスコープの alert の値を出力 --%>
+                    <td colspan="2" class="color-error text-left">
+                        <c:out value="${requestScope.alert2}" />
                     </td>
                 </tr>
             </c:if>
