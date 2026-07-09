@@ -11,7 +11,7 @@ public class SnsDAO {
 	//finalにしてこの後、変数の中身を書き換えられないようにする
 	private final String DSN = "jdbc:mysql://localhost:3306/sns?useSSL=false";
 	private final String USER = "root";
-	private final String PASSWORD = "Weak";
+	private final String PASSWORD = "root";
 
 	// データベースの接続情報を返す
 	public Connection getConnection() {

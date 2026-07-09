@@ -1,14 +1,12 @@
 package dto;
 
-import java.util.Date;
-
 public class ShoutDTO {
 
 	// テーブルのカラムに合わせて変数を定義
 	private int shoutsId;
 	private String userName;
 	private String icon;
-	private Date date;
+	private String date;
 	private String writing;
 
 	// コンストラクタ（空の箱を作る）
@@ -40,11 +38,11 @@ public class ShoutDTO {
 		this.icon = icon;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

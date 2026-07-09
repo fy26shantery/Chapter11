@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public LoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -51,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 
 		RequestDispatcher dispatcher = null;
 		String message = null;
+		String message2 = null;
 
 		if (loginId.equals("") || password.equals("")) {
 			// ログインID かユーザー名、パスワードどれか、もしくは双方未入力なら
@@ -61,8 +61,21 @@ public class LoginServlet extends HttpServlet {
 
 			// index.jsp に処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
+
+		}
+
+		if (!loginId.matches("^[a-z0-9]+$") || !password.matches("^[a-z0-9]+$")) {
+			//半角英数字でないなら
+			message2 = "半角英数字で入力してください。";
+
+			// エラーメッセージをリクエストオブジェクトに保存
+			request.setAttribute("alert2", message2);
+
+			// index.jsp に処理を転送
+			dispatcher = request.getRequestDispatcher("index.jsp");
+
 		} else {
+
 			// ログイン認証を行い、ユーザー情報を取得
 			DBManager dbm = new DBManager();
 			UserDTO user = dbm.getLoginUser(loginId, password);
@@ -87,9 +100,10 @@ public class LoginServlet extends HttpServlet {
 				//処理の転送先をindex.jspに指定
 				dispatcher = request.getRequestDispatcher("index.jsp");
 			}
-			//処理を転送
-			dispatcher.forward(request, response);
+
 		}
+		//処理を転送
+		dispatcher.forward(request, response);
 	}
 
 }

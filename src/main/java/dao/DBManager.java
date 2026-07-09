@@ -66,7 +66,7 @@ public class DBManager extends SnsDAO {
 				dto.setShoutsId(rset.getInt("shoutsId"));
 				dto.setUserName(rset.getString("userName"));
 				dto.setIcon(rset.getString("icon"));
-				dto.setDate(rset.getTimestamp("date")); //時、分、秒まで図れるgetTimestamp
+				dto.setDate(rset.getString("date"));
 				dto.setWriting(rset.getString("writing"));
 				list.add(dto);
 			}

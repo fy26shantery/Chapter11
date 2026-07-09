@@ -32,9 +32,23 @@ public class BbsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String writing = request.getParameter("shout");
-		RequestDispatcher dispatcher;
+		RequestDispatcher dispatcher = null;
+		String message = null;
 
 		// 書き込み内容があれば、リストに追加
+
+		if (writing.equals("")) {
+			// ログインID かユーザー名、パスワードどれか、もしくは双方未入力なら
+			message = "叫ぶ欄は必須入力です";
+
+			// エラーメッセージをリクエストオブジェクトに保存
+			request.setAttribute("alert", message);
+
+			// index.jsp に処理を転送
+			dispatcher = request.getRequestDispatcher("top.jsp");
+			dispatcher.forward(request, response);
+		}
+
 		if (!writing.equals("")) {
 			HttpSession session = request.getSession();
 			// セッションからログインユーザ情報を取得
@@ -44,7 +58,6 @@ public class BbsServlet extends HttpServlet {
 			if (dbm == null) {
 				dbm = new DBManager();
 			}
-
 			// ログインユーザ情報と書き込み内容を引数に、リストに追加するメソッドを呼び出し
 			dbm.setWriting(user, writing);
 
