@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		String message = null;
 		if (loginId.equals("") || password.equals("") /*|| userName.equals("")*/) {
 			// ログインID かパスワードかユーザ名どれか、もしくは双方未入力なら
-			message = "ログインIDとパスワード、ユーザ名は必須入力です";
+			message = "ログインIDとパスワード、は必須入力です";
 			// エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert", message);
 
@@ -80,10 +80,9 @@ public class LoginServlet extends HttpServlet {
 
 			} else {
 				// ユーザー情報が取得できない場合
-				// エラーメッセージをリクエストオブジェクトに保存
-				if (!loginId.matches("[0-9a-zA-Z]")) {
+				if (!loginId.matches("^[0-9a-zA-Z]+$")) {//半角英数字じゃなかったら
 
-					message = "パスワードは半角英数字で入力してください";
+					message = "ログインIDは半角英数字で入力してください";
 					// エラーメッセージをリクエストオブジェクトに保存
 					request.setAttribute("alert", message);
 

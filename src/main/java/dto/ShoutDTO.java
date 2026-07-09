@@ -1,7 +1,7 @@
 package dto;
 
 public class ShoutDTO {
-	private int shoutsId;
+	private int shoutsId; //ID
 	private String userName; // ユーザー名
 	private String icon; // ユーザーアイコン
 	private String date; // 書き込み日時

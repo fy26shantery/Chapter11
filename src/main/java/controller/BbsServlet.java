@@ -35,7 +35,7 @@ public class BbsServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 
 		// 書き込み内容があれば、リストに追加
-		if (!writing.isBlank()) {//からの時や空白の時にエラーが出ます
+		if (writing != null && !writing.isBlank()) {//テキストボックスが空の時や空白の時にエラーが出ます
 			HttpSession session = request.getSession();
 			// セッションからログインユーザ情報を取得
 			UserDTO user = (UserDTO) session.getAttribute("user");
@@ -54,11 +54,8 @@ public class BbsServlet extends HttpServlet {
 			// リストをセッションに保存
 			session.setAttribute("shouts", list);
 
-			// top.jsp に処理を転送
-			//			dispatcher = request.getRequestDispatcher("top.jsp");
-			//			dispatcher.forward(request, response);
 		} else {
-			String message = "文字を入力してください";
+			String message = "空白はだめです。文字を入力してください。";//インデックスで使ったアラートを流用
 			request.setAttribute("alert", message);
 		}
 

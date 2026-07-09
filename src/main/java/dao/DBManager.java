@@ -22,7 +22,7 @@ public class DBManager extends SnsDAO {
 		UserDTO user = null; // 登録ユーザー情報
 
 		try (Connection conn = getConnection();) {// データベース接続情報取得
-			try (PreparedStatement pstmt = conn.prepareStatement(sql)) { // SELECT 構文登録)
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) { // SELECT 構文登録
 				// SELECT 文の登録と実行
 				pstmt.setString(1, loginId);
 				pstmt.setString(2, password);
@@ -50,6 +50,7 @@ public class DBManager extends SnsDAO {
 
 	// 書き込み内容リストの getter
 	public ArrayList<ShoutDTO> getShoutList() {//shoutsの表すべてを取得したい
+
 		ArrayList<ShoutDTO> list = new ArrayList<ShoutDTO>();//リスト作成
 		String sql = "SELECT * FROM shouts ORDER BY date DESC";
 		try (Connection conn = getConnection()) {//DTOの継承をしているから
@@ -93,7 +94,7 @@ public class DBManager extends SnsDAO {
 				Calendar calendar = Calendar.getInstance();
 				//SimpleDateFormat 日付のデータを、見やすい文字（String）の形に変換
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//でっかい”H”だと24時間表記になる
-				pstmt.setString(3, sdf.format(calendar.getTime()));
+				pstmt.setString(3, sdf.format(calendar.getTime()));//Calendar オブジェクトが持っている日時を Date 型として取り出す
 				pstmt.setString(4, writing);
 
 				int cnt = pstmt.executeUpdate();

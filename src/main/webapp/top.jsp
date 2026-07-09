@@ -78,7 +78,7 @@
 						<td>${shout.date}</td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea rows="5" class="form-control">${shout.writing}</textarea></td>
+						<td colspan="2"><p rows="5" class="form-control" readonly>${shout.writing}</p></td>
 					</tr>
 				</table>
 			</c:forEach>
