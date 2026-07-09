@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
- <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +26,14 @@
 		<div style="width: 40%" class="container padding-y-5">
 			<%-- action 属性にサーブレットを指定 --%>
 			<form action="./login" method="post">
-				<table style="width: 400px; margin:0 auto;" class="table">
+				<table style="width: 400px; margin: 0 auto;" class="table">
 					<tr>
 						<%-- ログインIDの入力欄の名前はloginId --%>
 						<td class="color-main text-left">ログインID</td>
 						<td class="text-left"><input class="form-control" type="text"
-							name="loginId" value="" size="20" autofocus/></td>
+							name="loginId" value="" size="20" autofocus /></td>
 					</tr>
-					
+
 					<tr>
 						<%-- パスワード入力欄の名前はpassword --%>
 						<td class="color-main text-left">パスワード</td>
@@ -44,14 +44,22 @@
 						<td colspan="2" class="text-right"><input class="btn"
 							type="submit" value="ログイン" /></td>
 					</tr>
-					<%-- リクエストスコープにalertがあれば --%>
- <c:if
- test="${requestScope.alert != null && requestScope.alert != ''}">
- <tr>
- <%-- リクエストスコープのalert の値を出力 --%>
-					<td colspan="2" class="color-error text-left"><c:out
-							value="${requestScope.alert }" /></td>
-					</tr>
+					<%-- リクエストスコープにalert1があれば --%>
+					<c:if
+						test="${requestScope.alert1 != null && requestScope.alert1 != ''}">
+						<tr>
+							<%-- リクエストスコープのalert1(入力不足) の値を出力 --%>
+							<td colspan="2" class="color-error text-left"><c:out
+									value="${requestScope.alert1 }" /></td>
+						</tr>
+					</c:if>
+					<c:if
+						test="${requestScope.alert2 != null && requestScope.alert2 != ''}">
+						<tr>
+							<%-- リクエストスコープのalert2(入力ミス) の値を出力 --%>
+							<td colspan="2" class="color-error text-left"><c:out
+									value="${requestScope.alert2 }" /></td>
+						</tr>
 					</c:if>
 				</table>
 			</form>

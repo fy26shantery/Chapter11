@@ -54,11 +54,12 @@
 							value="" size="60" /></td>
 						<td><input class="btn" type="submit" value="叫ぶ" /></td>
 					</tr>
-					<c:if test="${requestScope.alert != null && requestScope.alert != ''}">
+					<c:if
+						test="${requestScope.alert != null && requestScope.alert != ''}">
 						<tr>
 							<%-- リクエストスコープのalert の値を出力 --%>
-							<td colspan="2" class="color-error text-left">
-							<c:out value="${requestScope.alert }" /></td>
+							<td colspan="2" class="color-error text-left"><c:out
+									value="${requestScope.alert }" /></td>
 						</tr>
 					</c:if>
 				</table>
@@ -86,9 +87,12 @@
 						<td>${shout.date }</td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea rows="5" class="form-control" tabindex="-1" disabled>${shout.writing }</textarea>
-						</td>
+						<td colspan="2" rowspan="5" class="form-control">${shout.writing }</td>
 					</tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
 				</table>
 			</c:forEach>
 		</div>
