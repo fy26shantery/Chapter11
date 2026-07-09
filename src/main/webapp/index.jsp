@@ -39,25 +39,39 @@
 		<td class="text-center"><input class="form-control" type="password" name="password" value="" size="20" /></td>
 	</tr>
 	<tr>
-		<td colspan="3" class="text-right"><input class="btn" type="submit" value="ログイン" /></td>
+		<td colspan="2" class="text-right"><input class="btn" type="submit" value="ログイン" /></td>
+	
+	<td colspan="2" class="text-left"><input class="btn" onclick="location.href='userRegistInput.jsp'" value="新規登録"  ></td>
+	</form>
 	</tr>
+	
 	<%-- リクエストスコープにalertがあれば --%>
 	<c:if
-	test="${requestScope.alert != null && requestScope.alert !=''}">
+	test="${requestScope.notInputAlert != null && requestScope.notInputAlert !=''}">
 	<tr>
 		<%-- リクエストスコープの alert の値を出力 --%>
 		<td colspan="2" class="color-error text-left"><c:out
-			value="${requestScope.alert}" /></td>	
+			value="${requestScope.notInputAlert}" /></td>	
 			
 	</tr>
 	</c:if>
 	
 	<c:if
-	test="${requestScope.alert2 != null && requestScope.alert2 !=''}">
+	test="${requestScope.halfwidthAlert != null && requestScope.halfwidthAlert !=''}">
 	<tr>
 		<%-- リクエストスコープの alert の値を出力 --%>
 		<td colspan="2" class="color-error text-left"><c:out
-			value="${requestScope.alert2}" /></td>
+			value="${requestScope.halfwidthAlert}" /></td>
+	</tr>
+	</c:if>
+	
+	
+	<c:if
+	test="${requestScope.missMatchAlert != null && requestScope.missMatchAlert !=''}">
+	<tr>
+		<%-- リクエストスコープの alert の値を出力 --%>
+		<td colspan="2" class="color-error text-left">
+		<c:out value="${requestScope.missMatchAlert}" /></td>
 	</tr>
 	</c:if>
 	

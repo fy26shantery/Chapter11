@@ -35,7 +35,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -49,15 +50,16 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		RequestDispatcher dispatcher = null;
-		String message = null;
-		String message2 = null;
+		String missMatchMsg = null;
+		String notInputMsg = null;
+		String halfwidthMsg = null;
 
 		if (loginId.equals("") || password.equals("")) {
 			// ログインID かユーザー名、パスワードどれか、もしくは双方未入力なら
-			message = "ログインIDとユーザー名、パスワードは必須入力です";
+			notInputMsg = "ログインIDとユーザー名、パスワードは必須入力です";
 
 			// エラーメッセージをリクエストオブジェクトに保存
-			request.setAttribute("alert", message);
+			request.setAttribute("notInputAlert", notInputMsg);
 
 			// index.jsp に処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
@@ -66,10 +68,10 @@ public class LoginServlet extends HttpServlet {
 
 		if (!loginId.matches("^[a-z0-9]+$") || !password.matches("^[a-z0-9]+$")) {
 			//半角英数字でないなら
-			message2 = "半角英数字で入力してください。";
+			halfwidthMsg = "半角英数字で入力してください。";
 
 			// エラーメッセージをリクエストオブジェクトに保存
-			request.setAttribute("alert2", message2);
+			request.setAttribute("halfwidthAlert", halfwidthMsg);
 
 			// index.jsp に処理を転送
 			dispatcher = request.getRequestDispatcher("index.jsp");
@@ -94,8 +96,8 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				// ユーザー情報が取得できない場合
 				// エラーメッセージをリクエストオブジェクトに保存
-				message = "ログインIDまたはパスワードが違います";
-				request.setAttribute("alert", message);
+				missMatchMsg = "ログインIDまたはパスワードが違います";
+				request.setAttribute("missMatchAlert", missMatchMsg);
 
 				//処理の転送先をindex.jspに指定
 				dispatcher = request.getRequestDispatcher("index.jsp");
