@@ -46,7 +46,7 @@
 						<td class="text-left">${user.password }</td>
 					</tr>
 					<tr>
-						<td><span class="icon-smile color-main text-left"></span>アイコン</td>
+						<td class="color-main text-left"><span class="icon-smile"></span>アイコン</td>
 
 
 						<c:choose>

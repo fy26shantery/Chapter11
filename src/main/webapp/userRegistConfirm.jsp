@@ -19,7 +19,7 @@
 <body>
 	<div class="bg-success padding-y-5">
 		<div class="padding-y-5 text-center">
-			<strong>ユーザー登録入力画面</strong>
+			<strong>ユーザー登録確認画面</strong>
 			<p>登録します。よろしいでしょうか？</p>
 		</div>
 	</div>
@@ -46,7 +46,7 @@
 						<td class="text-left">${user.password }</td>
 					</tr>
 					<tr>
-						<td><span class="icon-smile color-main text-left"></span>アイコン</td>
+						<td class="color-main text-left"><span class="icon-smile "></span>アイコン</td>
 
 
 						<c:choose>
