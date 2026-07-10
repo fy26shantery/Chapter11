@@ -15,7 +15,7 @@
 
 	
 
-	<form action="./registCheck" methoindexd="post">
+	<form action="./uic" methoindexd="post">
 		<table style="width: 400px" class="table container padding-y-5">
 
 
