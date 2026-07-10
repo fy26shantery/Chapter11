@@ -45,11 +45,38 @@ public class DBManager extends SnsDAO {
 		return user;
 	}
 
+	//userデータをInsertするためのメソッド
+	public boolean insertUserData(UserDTO user) {
+		boolean result = false; //正常終了かを判定する変数
+		try (Connection conn = getConnection()) {
+			//引数をデータベースに挿入するSQL文
+			String sql = "INSERT INTO users (userId,loginId,password,icon,profile) VALUES(?,?,?,?,?)";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				//データベースにuserデータを挿入
+				pstmt.setString(1, user.getLoginId());
+				pstmt.setString(2, user.getUserName());
+				pstmt.setString(3, user.getPassword());
+				pstmt.setString(4, user.getIcon());
+				pstmt.setString(5, user.getProfile());
+
+				int log = pstmt.executeUpdate();
+
+				if (log == 1) { //正常終了
+					result = true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public ArrayList<ShoutDTO> getShoutsList() { //shoutsテーブルからの情報取得メソッド
 		ArrayList<ShoutDTO> list = new ArrayList<>();
 		String sql = "SELECT * FROM shouts ORDER BY date DESC";
 
 		try (Connection conn = getConnection()) {
+
 			try (PreparedStatement pstmt = conn.prepareStatement(sql);
 					ResultSet rset = pstmt.executeQuery()) { //try-with-resouces
 

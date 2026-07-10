@@ -20,6 +20,7 @@
 	<div class="bg-success padding-y-5">
 		<div class="padding-y-5 text-center">
 			<strong>ユーザー登録入力画面</strong>
+			<p>ユーザー登録をします。内容を入力してください。</p>
 		</div>
 	</div>
 
