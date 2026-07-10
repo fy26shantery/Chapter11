@@ -107,4 +107,43 @@ public class DBManager extends SnsDAO {
 		return result;
 	}
 
+	// 登録用IDを受け取り、登録済ユーザ一覧に一致したものがあるか検索
+	public boolean getTourokuUser(String tourokuId) {
+
+		//プレースホルダーしておく
+		String sql = "SELECT * FROM users WHERE loginId=?";
+
+		//try-with-resourcesで自動クローズ
+		try (Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setString(1, tourokuId);
+
+			// ResultSetも自動クローズにする
+			try (ResultSet rset = pstmt.executeQuery()) {
+				// 検索結果があるかどうか
+				if (rset.next()) {
+					return true; //サーブレットに返す
+				}
+			}
+
+		} catch (SQLException e) {
+			//SQLやDBが壊れているとき用
+			e.printStackTrace();
+		}
+		return false; //ユーザーが見つからない場合かエラーが起きた時
+	}
+
+	public UserDTO setTouroku(String userName, String loginId, String password, String icon,
+			String profile) {
+		UserDTO u = new UserDTO();
+
+		u.setUserName(userName);
+		u.setLoginId(loginId);
+		u.setPassword(password);
+		u.setIcon(icon);
+		u.setProfile(profile);
+		return u;
+	}
+
 }

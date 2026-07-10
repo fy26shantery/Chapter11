@@ -19,7 +19,6 @@
 		<h4><strong>ユーザー登録入力画面</strong>
 		<br>
 		<strong>ユーザー登録します。内容を入力してください。</strong>
-			<span class="icon-speaker pe-1x pe-va"></span>
 		</h4>
 	</div>
 </div>
@@ -36,21 +35,21 @@
 	<tr>
 		<%-- ユーザー名入力欄の名前はtourokuname --%>
 		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;ユーザー名</td>
-		<td class="text-center"><input class="form-control" type="text" name="tourokuname" value="" size="20" /></td>
+		<td class="text-center"><input class="form-control" type="text" name="tourokuName" value="" size="20" /></td>
 	</tr>
 	
 	<tr>
 		<%-- パスワード入力欄の名前はtourokupass --%>
 		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;パスワード</td>
-		<td class="text-center"><input class="form-control" type="text" name="tourokupass" value="" size="20" /></td>
+		<td class="text-center"><input class="form-control" type="text" name="tourokuPass" value="" size="20" /></td>
 	</tr>
 	
-	<%-- アイコン選択欄の名前はtourokuicon tourokuicon2 --%>
+	<%-- アイコン選択欄の名前はtourokuicon --%>
 	<tr>
 	<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;アイコン</td>
 	<td>
-	<label class="fancy-radio"><input type="radio" name="tourokuicon" id="maleicon" value="" checked><span class="icon-speaker pe-2x pe-va"></span></label>
-	<label class="fancy-radio"><input type="radio" name="tourokuicon2" id="femaleicon" value=""><span class="icon-speaker pe-2x pe-va"></span></label>
+	<label class="fancy-radio"><span></span><input type="radio" name="tourokuIcon" id="maleicon" value="" checked><span class="icon-speaker pe-2x pe-va"></span></label>
+	<label class="fancy-radio"><span></span><input type="radio" name="tourokuIcon" id="femaleicon" value=""><span class="icon-speaker pe-2x pe-va"></span></label>
 	</td>
 	</tr>
 	
@@ -58,36 +57,48 @@
 	<tr>
 		<%-- プロフィール入力欄の名前はtourokuprof --%>
 		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;プロフィール</td>
-		<td class="text-center"><input class="form-control" type="text" name="tourokuprof" value="" size="20" autofocus /></td>
+		<td class="text-center"><input class="form-control" type="text" name="tourokuProf" value="" size="20" autofocus /></td>
 	</tr>
 	
 	<tr>
-		<td class="text-right"><input class="btn" type="submit" value="ログイン" /></td>
+		<td class="text-center"><input class="btn" type="submit" value="登録確認画面へ進む" /></td>
 	
-	<form action="./userRegistInput.jsp" method="post">
-	<td class="text-left"><input class="btn" type="submit" value="新規登録" ></td>
+	<td class="text-center"><input class="btn" onclick="location.href='index.jsp'" value="戻る" ></td>
 	</form>
 	</tr>
 	
 	<%-- リクエストスコープにalertがあれば --%>
 	<c:if
-	test="${requestScope.alert != null && requestScope.alert !=''}">
+	test="${requestScope.notInputAlert != null && requestScope.notInputAlert !=''}">
 	<tr>
 		<%-- リクエストスコープの alert の値を出力 --%>
 		<td colspan="2" class="color-error text-left"><c:out
-			value="${requestScope.alert}" /></td>	
+			value="${requestScope.notInputAlert}" /></td>	
 			
 	</tr>
 	</c:if>
 	
 	<c:if
-	test="${requestScope.alert2 != null && requestScope.alert2 !=''}">
+	test="${requestScope.halfwidthAlert != null && requestScope.halfwidthAlert !=''}">
 	<tr>
 		<%-- リクエストスコープの alert の値を出力 --%>
 		<td colspan="2" class="color-error text-left"><c:out
-			value="${requestScope.alert2}" /></td>
+			value="${requestScope.halfwidthAlert}" /></td>
 	</tr>
 	</c:if>
+	
+	
+	<%-- リクエストスコープにalertがあれば --%>
+	<c:if
+	test="${requestScope.existingIdAlert != null && requestScope.existingIdAlert !=''}">
+	<tr>
+		<%-- リクエストスコープの alert の値を出力 --%>
+		<td colspan="2" class="color-error text-left"><c:out
+			value="${requestScope.existingIdAlert}" /></td>	
+			
+	</tr>
+	</c:if>
+	
 	
 	</table>
 </form>

@@ -39,9 +39,11 @@
 		<td class="text-center"><input class="form-control" type="password" name="password" value="" size="20" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" class="text-right"><input class="btn" type="submit" value="ログイン" /></td>
+		<%-- ログインボタン --%>
+		<td colspan="2" class="text-center"><input class="btn" type="submit" value="ログイン" /></td>
 	
-	<td colspan="2" class="text-left"><input class="btn" onclick="location.href='userRegistInput.jsp'" value="新規登録"  ></td>
+		<%-- 新規登録ボタン --%>
+	<td colspan="2" class="text-center"><input class="btn" onclick="location.href='userRegistInput.jsp'" value="新規登録"></td>
 	</form>
 	</tr>
 	
