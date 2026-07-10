@@ -26,6 +26,7 @@
 				<td class="text-left"><input class="form-control" type="text"
 				name="loginId" value="" size="20" autofocus /></td>
 			</tr>
+			
 			<tr>
 				<%-- パスワード入力欄の名前はpassword --%>
 				<td class="color-main text-left">パスワード</td>
@@ -34,7 +35,9 @@
 			</tr>
 		
 			<tr>
-				<td colspan="2" class="text-right"><input class="btn" type="submit" value="ログイン" /></td>
+				<td colspan="2" class="text-right"><input class="btn" type="submit" value="ログイン" /></td>	
+<!--				<td colspan="2" class="text-right"><a href="uii" class="btn">新規登録</a>-->
+				
 			</tr>
 			<%-- リクエストスコープにalertがあれば --%>
 			<c:if test="${requestScope.alert != null && requestScope.alert != ''}">
@@ -51,6 +54,10 @@
 				</tr>
 			</c:if>
 		</table>
+	</form>
+	<form action="./uii" method="post">
+						<td colspan="2" class="text-right"><input class="btn" type="submit" name="action" value="新規登録" /></td>	
+		
 	</form>
 </body>
 </html>

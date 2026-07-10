@@ -58,7 +58,7 @@ public class DBManager extends SnsDAO {
 				try (ResultSet rset = pstmt.executeQuery()) {
 
 					while (rset.next()) {
-						ShoutDTO shout = new ShoutDTO();//名前ミスdto です、見つかるたびにnewしないと毎回、上書き保存しちゃう
+						ShoutDTO shout = new ShoutDTO();//見つかるたびにnewしないと毎回、上書き保存しちゃう
 						shout.setShoutsId(rset.getInt("shoutsId"));
 						shout.setUserName(rset.getString("userName"));
 						shout.setIcon(rset.getString("icon"));
@@ -96,6 +96,73 @@ public class DBManager extends SnsDAO {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//でっかい”H”だと24時間表記になる
 				pstmt.setString(3, sdf.format(calendar.getTime()));//Calendar オブジェクトが持っている日時を Date 型として取り出す
 				pstmt.setString(4, writing);
+
+				int cnt = pstmt.executeUpdate();
+				if (cnt == 1) {
+					// INSERT文の実行結果が1なら登録成功
+					result = true;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public UserDTO getLoginIdCheck(String loginId) {
+		//	Connection conn = null; // データベース接続情報
+		//	PreparedStatement pstmt = null; // SQL 管理情報
+		//	ResultSet rset = null; // 検索結果
+
+		String sql = "SELECT * FROM users WHERE loginId=?";
+		UserDTO user = null; // 登録ユーザー情報
+
+		try (Connection conn = getConnection();) {// データベース接続情報取得
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) { // SELECT 構文登録
+				// SELECT 文の登録と実行
+				pstmt.setString(1, loginId);
+
+				try (ResultSet rset = pstmt.executeQuery()) {
+
+					// 検索結果があれば
+					if (rset.next()) {
+						// 必要な列から値を取り出し、ユーザー情報オブジェクトを生成
+						user = new UserDTO();
+						user.setLoginId(rset.getString(2));
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return user;
+	}
+
+	public boolean insertUser(UserDTO user) {
+
+		String loginId = user.getLoginId();
+		String password = user.getPassword();
+
+		UserDTO insert = getLoginIdCheck(loginId);
+
+		if (insert != null) {//すでにデータベースに登録されている
+			return false;
+
+		}
+		boolean result = false;
+		try (Connection conn = getConnection()) {
+			// INSERT文の登録と実行
+			String sql = "INSERT INTO users(loginId, userName,  password,icon, profile)VALUES(?, ?, ?, ?, ?)";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+				pstmt.setString(1, loginId);
+				pstmt.setString(2, user.getUserName());
+				pstmt.setString(3, password);
+				pstmt.setString(4, user.getIcon());
+				pstmt.setString(5, user.getProfile());
 
 				int cnt = pstmt.executeUpdate();
 				if (cnt == 1) {
