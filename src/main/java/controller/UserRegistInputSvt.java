@@ -25,7 +25,6 @@ public class UserRegistInputSvt extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -62,7 +61,7 @@ public class UserRegistInputSvt extends HttpServlet {
 
 		} else {
 			//半角英数字以外の入力の場合
-			alertMessage = "半角英数字で入力してください";
+			alertMessage = "ログインIDは半角英数字で入力してください";
 
 			errorCheck.add("error");
 			request.setAttribute("alertLogId", alertMessage);
@@ -93,7 +92,7 @@ public class UserRegistInputSvt extends HttpServlet {
 
 		} else {
 			//半角英数字以外の入力の場合
-			alertMessage = "半角英数字で入力してください";
+			alertMessage = "パスワードは半角英数字で入力してください";
 			errorCheck.add("error");
 			request.setAttribute("alertPass", alertMessage);
 		}

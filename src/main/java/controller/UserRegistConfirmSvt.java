@@ -21,13 +21,9 @@ public class UserRegistConfirmSvt extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -49,19 +45,27 @@ public class UserRegistConfirmSvt extends HttpServlet {
 		//データベース接続のためのオブジェクト作成
 		DBManager dbm = new DBManager();
 		RequestDispatcher dispatcher = null;
+		//Insertの実行＋実行結果が変数に代入される
+		String result = dbm.insertUserData(user);
 
-		if (dbm.insertUserData(user)) {
+		if (result.equals("success")) {
 			//データベースに正常登録できた場合
 			request.setAttribute("user", user); //遷移先のjspに登録したデータを受け渡す
 
 			dispatcher = request.getRequestDispatcher("userRegistResult.jsp");
 
+		} else if (result.equals("used")) {
+			//登録しようとしたIDがすでに使用されていた場合
+			String message = "そのログインIDはすでに使用されています";
+			request.setAttribute("alertRegist", message); //エラーメッセージを登録確認画面jspに送る
+
+			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
 		} else {
 			//データベース登録でエラーが発生した場合
 			String message = "登録に失敗しました";
-			request.setAttribute("alert", message); //エラーメッセージを登録確認画面jspに送る
+			request.setAttribute("alertRegist", message); //エラーメッセージを登録確認画面jspに送る
 
-			dispatcher = request.getRequestDispatcher("userRegistConfirm.jsp");
+			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
 		}
 
 		//正常かエラーかで指定された遷移先に移動

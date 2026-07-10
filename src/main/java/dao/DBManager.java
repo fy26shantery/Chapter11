@@ -46,24 +46,46 @@ public class DBManager extends SnsDAO {
 	}
 
 	//userデータをInsertするためのメソッド
-	public boolean insertUserData(UserDTO user) {
-		boolean result = false; //正常終了かを判定する変数
+	public String insertUserData(UserDTO user) {
+		String result = "failed"; //正常終了かを判定する変数
+		ArrayList<String> checkUsed = new ArrayList<>(); //ログインIDが使用済かどうか格納するリスト
 		try (Connection conn = getConnection()) {
-			//引数をデータベースに挿入するSQL文
-			String sql = "INSERT INTO users (userId,loginId,password,icon,profile) VALUES(?,?,?,?,?)";
-			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				//データベースにuserデータを挿入
-				pstmt.setString(1, user.getLoginId());
-				pstmt.setString(2, user.getUserName());
-				pstmt.setString(3, user.getPassword());
-				pstmt.setString(4, user.getIcon());
-				pstmt.setString(5, user.getProfile());
+			//データベースからログインIDを取得するSQL文
+			String sql = "SELECT loginId FROM users";
+			try (PreparedStatement pstmt1 = conn.prepareStatement(sql)) {
+				try (ResultSet rset = pstmt1.executeQuery()) {
 
-				int log = pstmt.executeUpdate();
+					//データベースにすでに登録されているログインIDと登録したいIDが重複しないかの確認
+					while (rset.next()) {
+						if (user.getLoginId().equals(rset.getString("loginId"))) {
+							checkUsed.add("used");
+						}
+					}
 
-				if (log == 1) { //正常終了
-					result = true;
+					if (checkUsed.size() == 0) {
+						//ログインIDがデータベースに登録されていなかった場合
+						sql = "INSERT INTO users (loginId,userName,password,icon,profile) VALUES(?,?,?,?,?)";
+						try (PreparedStatement pstmt2 = conn.prepareStatement(sql)) {
+							//データベースにuserデータを挿入
+							pstmt2.setString(1, user.getLoginId());
+							pstmt2.setString(2, user.getUserName());
+							pstmt2.setString(3, user.getPassword());
+							pstmt2.setString(4, user.getIcon());
+							pstmt2.setString(5, user.getProfile());
+
+							int log = pstmt2.executeUpdate();
+
+							if (log == 1) { //正常終了
+								result = "success";
+							}
+						}
+
+					} else { //ログインIDがすでに使用されていた場合
+						result = "used";
+
+					}
 				}
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

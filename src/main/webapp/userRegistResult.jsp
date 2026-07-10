@@ -14,20 +14,20 @@
 <link rel="stylesheet" href="./css/helper.css">
 <link rel="stylesheet" href="./css/mymade.css">
 
-<title>ユーザ登録</title>
+<title>ユーザ登録完了</title>
 </head>
 <body>
 	<div class="bg-success padding-y-5">
 		<div class="padding-y-5 text-center">
-			<strong>ユーザー登録入力画面</strong>
-			<p>登録します。よろしいでしょうか？</p>
+			<strong>ユーザー登録結果画面</strong>
+			<p>以下の内容で登録が完了しました。</p>
 		</div>
 	</div>
 
 	<div class="padding-y-5">
 		<div style="width: 40%" class="container padding-y-5">
 			<%-- action 属性にサーブレットを指定 --%>
-			<form action="./uic" method="post">
+			<form action="./uir" method="post">
 				<table style="width: 400px; margin: 0 auto;" class="table">
 					<tr>
 						<%-- ログインIDの出力欄の名前はloginId --%>
@@ -64,41 +64,23 @@
 						<td class="icon-smile color-main text-left">プロフィール</td>
 						<td class="text-left">${user.profile }</td>
 					</tr>
-				</table>
-				<table style="width: 400px; margin: 0 auto;" class="table">
-					<%-- 入力された値をデータベース挿入の仲立ちをするcontrollに送る --%>
-					<input type="hidden" name="loginId" value="${user.loginId}">
-					<input type="hidden" name="userName" value="${user.userName}">
-					<input type="hidden" name="password" value="${user.password}">
-					<input type="hidden" name="icon" value="${user.icon}">
-					<input type="hidden" name="profile" value="${user.profile}">
-
-
 					<tr>
-						<td colspan="2" class="text-center"><input class="btn"
-							type="submit" value="ＯＫ" /></td>
-						
-							<%-- 入力された値を入力フォームへ戻す仲立ちをするcontrollに送る --%>
-							<input type="hidden" name="loginId" value="${user.loginId}">
-							<input type="hidden" name="userName" value="${user.userName}">
-							<input type="hidden" name="password" value="${user.password}">
-							<input type="hidden" name="icon" value="${user.icon}"> <input
-								type="hidden" name="profile" value="${user.profile}">
-
-							<td colspan="2" class="text-center"><input class="btn"
-								type="submit" formaction="userRegistInput.jsp" value="キャンセル" /></td>
-						
+						<td colspan="1" class="text-center"><input class="btn"
+							type="submit" value="戻る"  /></td>
 					</tr>
-					<%-- エラーがある場合 --%>
-					<c:if
-						test="${requestScope.alert != null && requestScope.alert != ''}">
-						<tr>
-							<%-- ログインIDのエラーを出力 --%>
-							<td colspan="2" class="color-error text-left"><c:out
-									value="${requestScope.alert }" /></td>
-						</tr>
-					</c:if>
 				</table>
+
+
+
+				<%-- エラーがある場合 --%>
+				<c:if
+					test="${requestScope.alertLogId != null && requestScope.LogId1 != ''}">
+					<tr>
+						<%-- ログインIDのエラーを出力 --%>
+						<td colspan="2" class="color-error text-left"><c:out
+								value="${requestScope.alertLogId }" /></td>
+					</tr>
+				</c:if>
 		</div>
 	</div>
 </body>
