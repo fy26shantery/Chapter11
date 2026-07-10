@@ -107,4 +107,55 @@ public class DBManager extends SnsDAO {
 		return result;
 	}
 
+	public UserDTO isLoginID(String loginId) {
+
+		UserDTO user = null;
+
+		try (Connection conn = getConnection()) {
+			String sql = "SELECT * FORM user WHERE loginId = ?";
+
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, "loginId");
+
+				try (ResultSet rset = pstmt.executeQuery(sql);) {
+
+					if (rset.next()) {
+						user = new UserDTO();
+						user.setLoginId(rset.getString("loginId"));
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return user;
+	}
+
+	public UserDTO registerUser(String loginId, String userName, String password, String Icon, String profile) {
+
+		String sql = "INSERT INTO shouts (loginId, userName, password, Icon, profile) VALUES (?,?,?,?,?)";
+		UserDTO user = null;
+
+		try (Connection conn = getConnection()) {
+
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+				pstmt.setString(1, loginId);
+				pstmt.setString(2, userName);
+				pstmt.setString(3, password);
+				pstmt.setString(4, Icon);
+				pstmt.setString(5, profile);
+
+				int result = pstmt.executeUpdate();
+
+				if (result > 0) {
+
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 }

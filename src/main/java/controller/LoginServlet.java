@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		String message1 = null;
 		String message2 = null;
-		//String message3 = null;
 
 		if (loginId == null || loginId.equals("") || password == null || password.equals("")) {
 			//ログインID未入力
@@ -98,4 +97,5 @@ public class LoginServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
+
 }

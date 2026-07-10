@@ -19,9 +19,10 @@
 <%-- action 属性にサーブレットを指定 --%>
 <div class="padding-y-5">
 <div style="width: 40%" class="container padding-y-5">
-<form action="./login" method="post">
+
 <p class="text-center">ログインIDとパスワードを入力してください</p>
-	<table style="width: 400px; margin: 0 auto;" class="table">
+<table style="width: 400px; margin: 0 auto;" class="table">
+	<form action="./login" method="post">
 		<tr>
 			<%-- ログインID入力欄の名前はloginId --%>
 			<td class="color-main text-left">ログインID</td>
@@ -35,10 +36,18 @@
 			<td class="text-left"><input class="form-control" type="password"
 			 name="password" value="" size="20" /></td>
 		</tr>
+</table>
+<table style="width: 400px; margin: 0 auto;" class="table">
 		<tr>
-			<td colspan="2" class="text-right"><input class="btn"
+			<td colspan="2"><input class="btn"
 			type="submit" value="ログイン" /></td>
+		</form>	
+		<form action="userRegistInput.jsp" method="post">
+			<td colspan="2"><input class="btn"
+			type="submit" value="新規登録" /></td>
+		</form>
 		</tr>
+</table>
 		<%-- リクエストスコープにalertがあれば --%>
 		<c:if test="${requestScope.alert1 != null && requestScope.alert1 != '' }">
 			<tr>
@@ -54,8 +63,7 @@
 				value="${requestScope.alert2}" /></td>
 			</tr>
 		</c:if>
-	</table>
-</form>
+</table>
 </div>
 </div>
 </body>
