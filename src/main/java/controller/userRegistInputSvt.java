@@ -42,8 +42,11 @@ public class userRegistInputSvt extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//		doGet(request, response);
-	//	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8"); // 文字化け対策
+		RequestDispatcher dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
+		dispatcher.forward(request, response);
+	}
 
 }

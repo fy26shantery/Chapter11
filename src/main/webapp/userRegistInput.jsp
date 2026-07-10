@@ -15,7 +15,7 @@
 
 	
 
-	<form action="./uic" methoindexd="post">
+	<form action="./uic" method="post">
 		<table style="width: 400px" class="table container padding-y-5">
 
 
@@ -23,7 +23,8 @@
 				<td class="color-main text-left">ログインID<span
 					class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control" type="text"
-					name="loginId" value="" size="30" placeholder="半角英数字 4〜32文字" /> <c:if
+					name="loginId" value="${param.loginId}" size="
+0" placeholder="半角英数字 4～32文字" /> <c:if
 						test="${!empty requestScope.errId}">
 						<div class="color-error">
 							<c:out value="${requestScope.errId}" />
@@ -34,7 +35,7 @@
 			<tr>
 				<td class="color-main text-left">ユーザー名<span class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control" type="text"
-					name="userName" value="" size="30" placeholder="1〜64文字" /> <c:if
+					name="userName" value="${param.userName}" size="30" placeholder="1〜64文字" /> <c:if
 						test="${!empty requestScope.errName}">
 						<div class="color-error">
 							<c:out value="${requestScope.errName}" />
@@ -45,8 +46,8 @@
 			<tr>
 				<td class="color-main text-left">パスワード<span class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control"
-					type="password" name="password" value="" size="30"
-					placeholder="半角英数字 4〜32文字" /> <c:if
+					type="password" name="password" value="${param.password}" size="30"
+					placeholder="半角英数字 4～32文字" /> <c:if
 						test="${!empty requestScope.errPass}">
 						<div class="color-error">
 							<c:out value="${requestScope.errPass}" />
@@ -57,10 +58,10 @@
 			<tr>
 				<td class="color-main text-left">アイコン<span class="color-error">（必須）</span></td>
 				<td class="text-left"><label style="margin-right: 15px;">
-						<input type="radio" name="icon" value="pe-7s-user"> <span
+						<input type="radio" name="icon" value="pe-7s-user" ${param.icon == 'pe-7s-user' ? 'checked' :''}> <span
 						class="pe-7s-user pe-lg pe-va"></span> 男性ユーザー
 				</label> <label> <input type="radio" name="icon"
-						value="pe-7s-user-female"> <span
+						value="pe-7s-user-female" ${param.icon == 'pe-7s-user-female' ? 'checked' :''}> <span
 						class="pe-7s-user-female pe-lg pe-va"></span> 女性ユーザー
 				</label> <c:if test="${!empty requestScope.errIcon}">
 						<div class="color-error">
@@ -73,7 +74,7 @@
 				<td class="color-main text-left">プロフィール<br>（任意）
 				</td>
 				<td class="text-left"><textarea class="form-control"
-						name="profile" rows="4" placeholder="自己紹介を入力してください（128文字以内）"></textarea>
+						name="profile" rows="4" placeholder="自己紹介を入力してください（128文字以内）">${param.profile}</textarea>
 					<c:if test="${!empty requestScope.errProfile}">
 						<div class="color-error">
 							<c:out value="${requestScope.errProfile}" />

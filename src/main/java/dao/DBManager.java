@@ -109,4 +109,35 @@ public class DBManager extends SnsDAO {
 		}
 		return result;
 	}
+
+	public boolean isOverlap(String loginId) {
+		String sql = "SELECT * FROM users WHERE loginId = ?";
+		try (java.sql.Connection conn = getConnection();
+				java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, loginId);
+			try (java.sql.ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next())
+					return true;
+			}
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public void insertUser(UserDTO user) {
+		String sql = "INSERT INTO users (loginId, userName, password, icon, profile) VALUES (?, ?, ?, ?, ?)";
+		try (java.sql.Connection conn = getConnection();
+				java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, user.getLoginId());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, user.getPassword());
+			pstmt.setString(4, user.getIcon());
+			pstmt.setString(5, user.getProfile());
+
+			pstmt.executeUpdate();
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
