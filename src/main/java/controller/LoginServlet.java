@@ -49,29 +49,29 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		RequestDispatcher dispatcher = null;
-		String message = null;
-		String message2 = null;
+		String idMessage = null;
+		String passMessage = null;
 
-		//ログインIDのチェック（結果は message に入れる）
+		//ログインIDのチェック（結果は idMessage に入れる）
 		if (loginId == null || loginId.equals("")) {
-			message = "ログインIDを入力してください。";
+			idMessage = "ログインIDを入力してください。";
 		} else if (!loginId.matches("^[a-zA-Z0-9]+$")) {
-			message = "ログインIDは半角英数字のみで入力してください。";
+			idMessage = "ログインIDは半角英数字のみで入力してください。";
 		}
 
-		//パスワードのチェック（結果は message2 に入れる）
+		//パスワードのチェック（結果は passMessage に入れる）
 		if (password == null || password.equals("")) {
-			message2 = "パスワードを入力してください。";
+			passMessage = "パスワードを入力してください。";
 		}
 
 		//どちらか片方でもエラーがあれば、この時点で index.jsp に戻す
-		if (message != null || message2 != null) {
-			//alert と alert2）で保存して上書きを防ぐ
-			if (message != null) {
-				request.setAttribute("alert", message);
+		if (idMessage != null || passMessage != null) {
+			//(idAlert と passAlert）で保存して上書きを防ぐ
+			if (idMessage != null) {
+				request.setAttribute("idAlert", idMessage);
 			}
-			if (message2 != null) {
-				request.setAttribute("alert2", message2);
+			if (passMessage != null) {
+				request.setAttribute("passAlert", passMessage);
 			}
 
 			// index.jsp に処理を転送して、ここで処理を終了(return)する
@@ -95,8 +95,8 @@ public class LoginServlet extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("top.jsp");
 		} else {
 			// ログイン失敗：組み合わせが違う場合
-			message = "ログインIDまたはパスワードが違います。";
-			request.setAttribute("alert", message); // ここは片方（alert）だけ使う
+			idMessage = "ログインIDまたはパスワードが違います。";
+			request.setAttribute("idAlert", idMessage);
 
 			dispatcher = request.getRequestDispatcher("index.jsp");
 		}
