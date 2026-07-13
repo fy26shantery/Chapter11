@@ -16,7 +16,7 @@
 	</h2>
 	<form action="./uir" method="post">
 
-		<table style="width: 500px" class="table" border="1">
+		<table style="width: 400px" class="table" border="1">
 
 			<!--		入力内容を確認するための表示項目-->
 			<tr>
@@ -54,6 +54,8 @@
 							class="btn" type="submit" value="キャンセル" />
 					</form>
 					<form action="./uir" method="post">
+					
+<!--					//確認画面で表示してるのはただのテキストなので、hiddenでデータを送ってあげる-->
 						<input type="hidden" name="loginId" value="${registUser.loginId}" />
 						<input type="hidden" name="userName"
 							value="${registUser.userName}" /> <input type="hidden"
