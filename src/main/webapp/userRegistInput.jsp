@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="./css/skyblue.css">
 <link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 <link rel="stylesheet" href="./css/helper.css">
+<link rel="stylesheet" href="./css/NewFile.css">
+
 <title>新規登録画面</title>
 </head>
 <body>
@@ -20,7 +22,7 @@
 
 <!--ログインID入力-->
 			<tr>
-				<td class="color-main text-left">ログインID<span
+				<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> ログインID<span
 					class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control" type="text"
 					name="loginId" value="${param.loginId}" size="
@@ -34,7 +36,7 @@
 
 <!--ユーザー名入力-->
 			<tr>
-				<td class="color-main text-left">ユーザー名<span class="color-error">（必須）</span></td>
+				<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> ユーザー名<span class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control" type="text"
 					name="userName" value="${param.userName}" size="30" placeholder="1〜64文字" /> <c:if
 						test="${!empty requestScope.errName}">
@@ -46,7 +48,7 @@
 
 <!--パスワード-->
 			<tr>
-				<td class="color-main text-left">パスワード<span class="color-error">（必須）</span></td>
+				<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> パスワード<span class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control"
 					type="password" name="password" value="${param.password}" size="30"
 					placeholder="半角英数字 4～32文字" /> <c:if
@@ -58,27 +60,51 @@
 			</tr>
 
 <!--アイコン選択-->
-			<tr>
-				<td class="color-main text-left">アイコン<span class="color-error">（必須）</span></td>
-				<td class="text-left">
-				<div style="display: flex; gap: 20px; align-items: center;">
-				<label class="fancy-radio">
-						<input type="radio" name="icon" value="pe-7s-user" ${param.icon == 'pe-7s-user' ? 'checked' :''}> <span
-						class="pe-7s-user pe-lg pe-va"></span> 男性ユーザー
-				</label> <label class="fancy-radio"> <input type="radio" name="icon"
-						value="pe-7s-user-female" ${param.icon == 'pe-7s-user-female' ? 'checked' :''}> <span
-						class="pe-7s-user-female pe-lg pe-va"></span> 女性ユーザー
-				</label>
-				</div> <c:if test="${!empty requestScope.errIcon}">
-						<div class="color-error">
-							<c:out value="${requestScope.errIcon}" />
-						</div>
-					</c:if></td>
-			</tr>
-
+<tr>
+	<td class="color-main text-left">
+		<span class="pe-7s-smile pe-lg pe-va"></span> アイコン<span class="color-error">（必須）</span>
+	</td>
+	<td class="text-left">
+		
+		<div class="my-radio-group">
+			
+			<!--自分で作ったmy-radio-label-->
+			<label class="my-radio-label">
+				<!--先にアイコンと文字を書く -->
+				<span class="pe-7s-user pe-lg pe-va"></span>
+				<span class="radio-text">男性ユーザー</span>
+				
+				<span class="fancy-radio">
+					<input type="radio" name="icon" value="pe-7s-user" ${param.icon == 'pe-7s-user' ? 'checked' :''}> 
+					<span></span>
+				</span>
+			</label> 
+			
+			<label class="my-radio-label">
+				<!-- 1. 先にアイコンと文字を書く -->
+				<span class="pe-7s-user-female pe-lg pe-va"></span>
+				<span class="radio-text">女性ユーザー</span>
+				
+				<!-- 2. 後からファンシーボタンを書く -->
+				<span class="fancy-radio">
+					<input type="radio" name="icon" value="pe-7s-user-female" ${param.icon == 'pe-7s-user-female' ? 'checked' :''}> 
+					<span></span>
+				</span>
+			</label> 
+			
+		</div>
+		
+		<c:if test="${!empty requestScope.errIcon}">
+			<div class="color-error mt-1">
+				<c:out value="${requestScope.errIcon}" />
+			</div>
+		</c:if>
+		
+	</td>
+</tr>
 <!--プロフィール入力-->
 			<tr>
-				<td class="color-main text-left">プロフィール(任意）
+				<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> プロフィール(任意）
 				</td>
 				<td class="text-left"><textarea class="form-control"
 						name="profile" rows="4" placeholder="自己紹介を入力してください（128文字以内）">${param.profile}</textarea>

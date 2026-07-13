@@ -1,0 +1,18 @@
+.my-radio-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* 💡ここから下を追加 */
+.my-radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* 文字と右側のボタンの間に少し隙間を作る */
+.radio-text {
+    margin-right: 8px;
+    margin-left: 4px; /* 左のアイコンとの隙間 */
+}

@@ -20,24 +20,24 @@
 	<h2>新規登録が完了しました</h2>
 	<table style="width: 400px" class="table" border="1">
 		<tr>
-			<td class="color-main text-left">ログインID</td>
+			<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> ログインID</td>
 			<td class="text-left"><c:out value="${registUser.loginId}" /></td>
 		</tr>
 		<tr>
-			<td class="color-main text-left">ユーザー名</td>
+			<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> ユーザー名</td>
 			<td class="text-left"><c:out value="${registUser.userName}" /></td>
 		</tr>
 		<tr>
-			<td class="color-main text-left">パスワード</td>
+			<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> パスワード</td>
 			<td class="text-left">********</td>
 		</tr>
 		<tr>
-			<td class="color-main text-left">アイコン</td>
+			<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> アイコン</td>
 			<td class="text-left"><span
 				class="${registUser.icon} pe-2x pe-va"></span></td>
 		</tr>
 		<tr>
-			<td class="color-main text-left">プロフィール</td>
+			<td class="color-main text-left"><span class="pe-7s-id pe-lg pe-va"></span> プロフィール</td>
 			<td class="text-left"><c:out value="${registUser.profile}" /></td>
 		</tr>
 		</table>
