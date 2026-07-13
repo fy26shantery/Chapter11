@@ -81,11 +81,11 @@
 			</label> 
 			
 			<label class="my-radio-label">
-				<!-- 1. 先にアイコンと文字を書く -->
+				<!--先にアイコンと文字を書く -->
 				<span class="pe-7s-user-female pe-lg pe-va"></span>
 				<span class="radio-text">女性ユーザー</span>
 				
-				<!-- 2. 後からファンシーボタンを書く -->
+				<!--後からファンシーボタンを書く -->
 				<span class="fancy-radio">
 					<input type="radio" name="icon" value="pe-7s-user-female" ${param.icon == 'pe-7s-user-female' ? 'checked' :''}> 
 					<span></span>
