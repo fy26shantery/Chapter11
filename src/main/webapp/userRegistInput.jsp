@@ -33,21 +33,21 @@
 						<%-- ログインIDの入力欄の名前はloginId --%>
 						<td class="icon-smile color-main text-left">ログインID</td>
 						<td class="text-left"><input class="form-control" type="text"
-							name="loginId" value="${param.loginId}" size="20" minlength="4" maxlength="32"
-							required autofocus /></td>
+							name="loginId" value="${param.loginId}" size="20" 
+							 autofocus /></td>
 					</tr>
 					<tr>
 						<%-- ユーザ名入力欄の名前はuserName --%>
 						<td class="icon-smile color-main text-left">ユーザ名</td>
-						<td class="text-left"><input class="form-control" type="text" name="userName" value="${param.userName}" size="20" minlength="1" maxlength="64"
-							required /></td>
+						<td class="text-left"><input class="form-control" type="text" name="userName" value="${param.userName}" size="20" 
+							 /></td>
 					</tr>
 
 					<tr>
 						<%-- パスワード入力欄の名前はpassword --%>
 						<td class="icon-smile color-main text-left">パスワード</td>
 						<td class="text-left"><input class="form-control"
-							type="password" name="password" value="${param.password}" size="20" minlength="4" maxlength="32" required /></td>
+							type="password" name="password" value="${param.password}" size="20"  /></td>
 					</tr>
 					<tr>
 						<td class="color-main text-left><span class="icon-smile"></span>アイコン</td>
@@ -56,17 +56,17 @@
 
 						<td class="my_merge_sq text-center"><span
 							class="icon-user pe-2x pe-va"></span><label class="fancy-radio">
-								<input type="radio" name="icon" id="icon-user" value="icon-user" <c:if test="${param.icon == 'icon-user'}">checked</c:if> maxlength="128" required> <span></span>
+								<input type="radio" name="icon" id="icon-user" value="icon-user" <c:if test="${param.icon == 'icon-user'}">checked</c:if>>  <span></span>
 						</label> <span class="icon-user-female pe-2x pe-va"></span> <label
 							class="fancy-radio"> <input type="radio" name="icon"
-								id="icon-user-female" value="icon-user-female" <c:if test="${param.icon == 'icon-user-female'}">checked</c:if> maxlength="128"
-								required> <span></span>
+								id="icon-user-female" value="icon-user-female" <c:if test="${param.icon == 'icon-user-female'}">checked</c:if>> 
+								 <span></span>
 						</label></td>
 					</tr>
 					<tr>
 						<%-- プロフィール入力欄の名前はprofile --%>
 						<td class="color-main text-left">プロフィール</td>
-						<td class="text-left"><input class="form-control" type="text" name="profile" value="${param.profile}" size="20" maxlength="128" /></td>
+						<td class="text-left"><input class="form-control" type="text" name="profile" value="${param.profile}" size="20" /></td>
 					</tr>
 				</table>
 
@@ -89,11 +89,19 @@
 
 					<%-- エラーがある場合 --%>
 					<c:if
-						test="${requestScope.alertLogId != null && requestScope.LogId1 != ''}">
+						test="${requestScope.alertLogId != null && requestScope.LogId != ''}">
 						<tr>
 							<%-- ログインIDのエラーを出力 --%>
 							<td colspan="2" class="color-error text-left"><c:out
 									value="${requestScope.alertLogId }" /></td>
+						</tr>
+					</c:if>
+					<c:if
+						test="${requestScope.alertLogIdLen != null && requestScope.LogIdLen != ''}">
+						<tr>
+							<%-- ログインIDの文字数エラーを出力 --%>
+							<td colspan="2" class="color-error text-left"><c:out
+									value="${requestScope.alertLogIdLen }" /></td>
 						</tr>
 					</c:if>
 					<c:if
@@ -112,12 +120,29 @@
 									value="${requestScope.alertPass }" /></td>
 						</tr>
 					</c:if>
+						<c:if
+						test="${requestScope.alertPassLen != null && requestScope.alertPassLen != ''}">
+						<tr>
+							<%-- パスワードの文字数エラーを出力 --%>
+							<td colspan="2" class="color-error text-left"><c:out
+									value="${requestScope.alertPassLen }" /></td>
+						</tr>
+					</c:if>
+					
 					<c:if
 						test="${requestScope.alertIcon != null && requestScope.alertIcon != ''}">
 						<tr>
 							<%-- アイコンのエラーを出力 --%>
 							<td colspan="2" class="color-error text-left"><c:out
 									value="${requestScope.alertIcon }" /></td>
+						</tr>
+					</c:if>
+					<c:if
+						test="${requestScope.alertProfile != null && requestScope.alertProfile != ''}">
+						<tr>
+							<%-- プロフィールのエラーを出力 --%>
+							<td colspan="2" class="color-error text-left"><c:out
+									value="${requestScope.alertProfile }" /></td>
 						</tr>
 					</c:if>
 					<c:if

@@ -1,4 +1,4 @@
-package dao;
+package usefulMethod;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

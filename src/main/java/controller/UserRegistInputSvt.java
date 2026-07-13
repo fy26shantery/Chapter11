@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import dao.InputCheck;
 import dto.UserDTO;
+import usefulMethod.MyCounter;
 
 @WebServlet("/uii")
 public class UserRegistInputSvt extends HttpServlet {
@@ -42,7 +42,8 @@ public class UserRegistInputSvt extends HttpServlet {
 		String icon = request.getParameter("icon");
 		String profile = request.getParameter("profile");
 
-		InputCheck check = new InputCheck();
+		usefulMethod.InputCheck check = new usefulMethod.InputCheck();
+		MyCounter counter = new MyCounter();
 		UserDTO user = new UserDTO();
 
 		String alertMessage = null;
@@ -67,16 +68,44 @@ public class UserRegistInputSvt extends HttpServlet {
 			request.setAttribute("alertLogId", alertMessage);
 		}
 
+		//ログインID入力文字数チェック
+		if (check.checkFilled(loginId)) { //入力がない時は処理をしない（上でしているので）
+			user.setLoginId(loginId);
+			int inputLength = user.getLoginId().length();
+			//メソッドを用いて最大桁数、最小桁数の条件に当てはまるか判定
+			String result = counter.maxAndMinCounter(32, 4, inputLength);
+			if (!(result.equals("OK"))) {
+				errorCheck.add("error");
+				result = "ログインIDは" + result; //resultのdefaltメッセージに該当項目を付け足す
+				request.setAttribute("alertLogIdLen", result);
+			}
+
+		}
+
 		//ユーザー名の入力チェック
 		if (check.checkFilled(userName)) {
 			//UserDTOオブジェクトに値をセット
-			user.setUserName(userName);
+
 		} else {
 			//入力されていない
 			alertMessage = "ユーザー名を入力してください";
 
 			errorCheck.add("error");
 			request.setAttribute("alertUN", alertMessage);
+		}
+
+		//ユーザー名入力文字数チェック
+		if (check.checkFilled(userName)) { //入力がない時は処理をしない（上でしているので）
+			user.setUserName(userName);
+			int inputLength = user.getUserName().length();
+			//メソッドを用いて最大桁数、最小桁数の条件に当てはまるか判定
+			String result = counter.maxAndMinCounter(64, 1, inputLength);
+			if (!(result.equals("OK"))) { //エラー時
+				errorCheck.add("error");
+				result = "ユーザー名は" + result; //resultのdefaltメッセージに該当項目を付け足す
+				request.setAttribute("alertUN", result);
+			}
+
 		}
 
 		//パスワードの入力チェック
@@ -97,6 +126,20 @@ public class UserRegistInputSvt extends HttpServlet {
 			request.setAttribute("alertPass", alertMessage);
 		}
 
+		//パスワード入力文字数チェック
+		if (check.checkFilled(password)) { //入力がない時は処理をしない（上でしているので）
+			user.setPassword(password);
+			int inputLength = user.getPassword().length();
+			//メソッドを用いて最大桁数、最小桁数の条件に当てはまるか判定
+			String result = counter.maxAndMinCounter(32, 4, inputLength);
+			if (!(result.equals("OK"))) { //エラー時
+				errorCheck.add("error");
+				result = "パスワードは" + result; //resultのdefaltメッセージに該当項目を付け足す
+				request.setAttribute("alertPassLen", result);
+			}
+
+		}
+
 		//アイコンのnullチェック
 		if (check.checkFilled(icon)) {
 			//UserDTOオブジェクトに値をセット
@@ -109,9 +152,33 @@ public class UserRegistInputSvt extends HttpServlet {
 			request.setAttribute("alertIcon", alertMessage);
 		}
 
+		//アイコン入力文字数チェック
+		if (check.checkFilled(icon)) { //入力がない時は処理をしない（上でしているので）
+			user.setIcon(icon);
+			int inputLength = user.getIcon().length();
+			//メソッドを用いて最大桁数、最小桁数の条件に当てはまるか判定
+			String result = counter.maxCounter(128, inputLength);
+			if (!(result.equals("OK"))) { //エラー時
+				errorCheck.add("error");
+				result = "アイコンは" + result; //resultのdefaltメッセージに該当項目を付け足す
+				request.setAttribute("alertIcon", result);
+			}
+
+		}
+
 		//プロフィールのセット
 		if (!(profile == null || profile.isBlank())) {
 			user.setProfile(profile);
+			//入力文字数チェック
+			int inputLength = user.getProfile().length();
+			//メソッドを用いて最大桁数、最小桁数の条件に当てはまるか判定
+			String result = counter.maxCounter(64, inputLength);
+			if (!(result.equals("OK"))) { //エラー時
+				errorCheck.add("error");
+				result = "プロフィールは" + result; //resultのdefaltメッセージに該当項目を付け足す
+				request.setAttribute("alertProfile", result);
+			}
+
 		} else { //未入力の場合、空文字をいれてセット
 			profile = "";
 			user.setProfile(profile);
