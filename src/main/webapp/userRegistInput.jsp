@@ -22,19 +22,19 @@
 				<%-- ログインID入力欄の名前はloginId --%>
 				<td class="color-main text-left icon-ball">ログインID</td>
 				<td class="text-left"><input class="form-control" type="text"
-				name="loginId" value="${loginId}" size="20" autofocus /></td>
+				name="loginId" value="${param.loginId}" size="20" autofocus /></td>
 			</tr>
 			<tr>
 				<%-- ユーザ名入力欄の名前はuserName --%>
 				<td class="color-main text-left icon-coffee">ユーザー名</td>
 				<td class="text-left"><input class="form-control" type="text"
-				name="userName" value="${userName}" size="20" /></td>
+				name="userName" value="${param.userName}" size="20" /></td>
 			</tr>
 			<tr>
 				<%-- パスワード入力欄の名前はpassword --%>
 				<td class="color-main text-left icon-home">パスワード</td>
 				<td class="text-left"><input class="form-control"
-				type="text" name="password" value="${password}" size="20" /></td>
+				type="text" name="password" value="${param.password}" size="20" /></td>
 			</tr>
 			
 			
@@ -43,14 +43,14 @@
 				<%-- アイコン入力欄の名前はicon --%>
 				<td class="color-main text-left icon-piggy">アイコン</td>
 			
-				<td><label><input type="radio" name="icon" value="icon-user" <c:if test="${empty icon || icon eq 'icon-user'}">checked</c:if>><span class="icon-user pe-3x pe-va"></span></label></td>
-				<td><label><input type="radio" name="icon" value="icon-user-female"  <c:if test="${icon eq 'icon-user-female'}">checked</c:if>><span class="icon-user-female pe-3x pe-va"</span></label></td>
+				<td><label><input type="radio" name="icon" value="icon-user" <c:if test="${empty param.icon || param.icon eq 'icon-user'}">checked</c:if>><span class="icon-user pe-3x pe-va"></span></label></td>
+				<td><label><input type="radio" name="icon" value="icon-user-female"  <c:if test="${param.icon eq 'icon-user-female'}">checked</c:if>><span class="icon-user-female pe-3x pe-va"</span></label></td>
 			</tr>
 			<tr>
 				<%-- プロフィール入力欄の名前はprofile --%>
 				<td class="color-main text-left icon-paperclip">プロフィール</td>
 				<td class="text-left"><input class="form-control" type="text"
-				name="profile" value="${profile}" size="20" /></td>
+				name="profile" value="${param.profile}" size="20" /></td>
 			</tr>
 		
 			<tr>
