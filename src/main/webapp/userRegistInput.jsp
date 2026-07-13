@@ -50,7 +50,7 @@
 							type="password" name="password" value="${param.password}" size="20"  /></td>
 					</tr>
 					<tr>
-						<td class="color-main text-left><span class="icon-smile"></span>アイコン</td>
+						<td class="color-main text-left "><span class="icon-smile"></span>アイコン</td>
 
 
 
@@ -65,7 +65,7 @@
 					</tr>
 					<tr>
 						<%-- プロフィール入力欄の名前はprofile --%>
-						<td class="color-main text-left">プロフィール</td>
+						<td class="color-main text-left icon-smile">プロフィール</td>
 						<td class="text-left"><input class="form-control" type="text" name="profile" value="${param.profile}" size="20" /></td>
 					</tr>
 				</table>
