@@ -21,28 +21,30 @@ public class userRegistConfirmSvt extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		//		入力された値を取得
 		String loginId = request.getParameter("loginId");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String icon = request.getParameter("icon");
 		String profile = request.getParameter("profile");
 
+		//		エラーメッセージ用の変数を用意
 		String errId = "", errName = "", errPass = "", errIcon = "", errProfile = "";
 		DBManager dbm = new DBManager();
 
 		// 入力チェック
 		if (loginId.equals("") || userName.equals("") || password.equals("")) {
 			errId = "必須項目（ID、ユーザー名、パスワード）を入力してください";
-		} else if (loginId.length() < 4) {
+		} else if (loginId.length() < 4 || loginId.length() > 32) {
 			errId = "ログインIDは4文字以上で入力してください";
 		} else if (!loginId.matches("^[a-zA-Z0-9]+$")) {
-			errId = "ログインIDは半角英数字で入力してください";
+			errId = "ログインIDは半角英数字で入力してください（空白、スペース不可）";
 		} else if (dbm.isOverlap(loginId)) {
 			errId = "指定されたログインIDは既に使用されています";
 		}
 
-		if (userName == null || userName.equals("")) {
-			errName = "ユーザー名を入力してください";
+		if (userName == null || userName.isBlank()) {
+			errName = "ユーザー名を入力してください(空白のみは不可）";
 		} else if (userName.length() > 64) {
 			errName = "ユーザー名は６４文字以下で入力してください";
 
@@ -53,7 +55,7 @@ public class userRegistConfirmSvt extends HttpServlet {
 		} else if (password.length() < 4 || password.length() > 32) {
 			errPass = "パスワードを４文字以上３２文字以下で入力してください";
 		} else if (!password.matches("^[a-zA-Z0-9]+$")) {
-			errPass = "パスワードは半角英数字で入力してください";
+			errPass = "パスワードは半角英数字のみで入力してください（空白、スペース不可）";
 		}
 		if (icon == null || icon.equals("")) {
 			errIcon = "アイコンを選択してください";
@@ -86,14 +88,14 @@ public class userRegistConfirmSvt extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 
-		String action = request.getParameter("action");
-		String forwardFile = "";
-		if ("back".equals(action)) {
-			forwardFile = "userRegistInput.jsp";
-		} else {
-			forwardFile = "userRegistResult.jsp";
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardFile);
-		dispatcher.forward(request, response);
+		//		String action = request.getParameter("action");
+		//		String forwardFile = "";
+		//		if ("back".equals(action)) {
+		//			forwardFile = "userRegistInput.jsp";
+		//		} else {
+		//			forwardFile = "userRegistResult.jsp";
+		//		}
+		//		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardFile);
+		//		dispatcher.forward(request, response);
 	}
 }

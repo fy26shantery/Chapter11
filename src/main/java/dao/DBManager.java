@@ -135,6 +135,7 @@ public class DBManager extends SnsDAO {
 			pstmt.setString(4, user.getIcon());
 			pstmt.setString(5, user.getProfile());
 
+			//			SQLの実行
 			pstmt.executeUpdate();
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();

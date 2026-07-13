@@ -17,6 +17,8 @@
 	<form action="./uir" method="post">
 
 		<table style="width: 500px" class="table" border="1">
+
+			<!--		入力内容を確認するための表示項目-->
 			<tr>
 				<td class="color-main text-left">ログインID</td>
 				<td class="text-left"><c:out value="${registUser.loginId}" /></td>
@@ -36,8 +38,7 @@
 			</tr>
 			<tr>
 				<td class="color-main text-left">プロフィール</td>
-				<td class="text-left">
-							<c:out value="${registUser.profile}" /></td>
+				<td class="text-left"><c:out value="${registUser.profile}" /></td>
 			</tr>
 			</form>
 			<tr>
@@ -51,12 +52,16 @@
 							type="hidden" name="icon" value="${registUser.icon}" /> <input
 							type="hidden" name="profile" value="${registUser.profile}" /> <input
 							class="btn" type="submit" value="キャンセル" />
-					</form> 				<form action="./uir" method="post"> 					<input type="hidden" name="loginId" value="${registUser.loginId}" />
-										<input type="hidden" name="userName" value="${registUser.userName}" />
-										<input type="hidden" name="password" value="${registUser.password}" />
-										<input type="hidden" name="icon" value="${registUser.icon}" /> <input
-											type="hidden" name="profile" value="${registUser.profile}" /> <input
-											class="btn" type="submit" value="登録する" /> 				</form>
+					</form>
+					<form action="./uir" method="post">
+						<input type="hidden" name="loginId" value="${registUser.loginId}" />
+						<input type="hidden" name="userName"
+							value="${registUser.userName}" /> <input type="hidden"
+							name="password" value="${registUser.password}" /> <input
+							type="hidden" name="icon" value="${registUser.icon}" /> <input
+							type="hidden" name="profile" value="${registUser.profile}" /> <input
+							class="btn" type="submit" value="登録する" />
+					</form>
 				</td>
 			</tr>
 		</table>

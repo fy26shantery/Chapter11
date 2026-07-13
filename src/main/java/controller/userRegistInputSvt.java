@@ -30,6 +30,8 @@ public class userRegistInputSvt extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 		String forwardFile = "";
+
+		//		ただログイン画面を開こうとしているのか、戻るボタンでログイン画面に戻ってきたのかを判断して、フォワード先をスイッチする
 		if ("back".equals(action)) {
 			forwardFile = "index.jsp";
 		} else {

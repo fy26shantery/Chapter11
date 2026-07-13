@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 		UserDTO user = dbm.getLoginUser(loginId, password);
 
 		if (user != null) {
-			// ログイン成功：必要なデータをセッションに詰めて top.jspにいく
+			// ログイン成功：データをセッションに詰めて top.jspにいく
 			ArrayList<ShoutDTO> list = dbm.getAllShouts();
 			HttpSession session = request.getSession();
 

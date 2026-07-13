@@ -18,7 +18,7 @@
 	<form action="./uic" method="post">
 		<table style="width: 400px" class="table container padding-y-5">
 
-
+<!--ログインID入力-->
 			<tr>
 				<td class="color-main text-left">ログインID<span
 					class="color-error">（必須）</span></td>
@@ -32,6 +32,7 @@
 					</c:if></td>
 			</tr>
 
+<!--ユーザー名入力-->
 			<tr>
 				<td class="color-main text-left">ユーザー名<span class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control" type="text"
@@ -43,6 +44,7 @@
 					</c:if></td>
 			</tr>
 
+<!--パスワード-->
 			<tr>
 				<td class="color-main text-left">パスワード<span class="color-error">（必須）</span></td>
 				<td class="text-left"><input class="form-control"
@@ -55,6 +57,7 @@
 					</c:if></td>
 			</tr>
 
+<!--アイコン選択-->
 			<tr>
 				<td class="color-main text-left">アイコン<span class="color-error">（必須）</span></td>
 				<td class="text-left"><label style="margin-right: 15px;">
@@ -70,8 +73,9 @@
 					</c:if></td>
 			</tr>
 
+<!--プロフィール入力-->
 			<tr>
-				<td class="color-main text-left">プロフィール<br>（任意）
+				<td class="color-main text-left">プロフィール(任意）
 				</td>
 				<td class="text-left"><textarea class="form-control"
 						name="profile" rows="4" placeholder="自己紹介を入力してください（128文字以内）">${param.profile}</textarea>
@@ -82,6 +86,7 @@
 					</c:if></td>
 			</tr>
 
+<!--画面遷移ボタン-->
 			<tr>
 				<td colspan="2" class="text-right"><input
 					class="btn btn-primary" type="submit" value="確認画面へ" /></td>
@@ -91,6 +96,7 @@
 
 	<br>
 
+<!--ログイン画面に戻る用のフォーム-->
 	<form action="./uii" method="get">
 		<input type="hidden" name="action" value="back" /> <input class="btn"
 			type="submit" value="ログイン画面に戻る" />
