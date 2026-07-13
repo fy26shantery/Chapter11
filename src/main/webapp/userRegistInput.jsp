@@ -16,7 +16,7 @@
 	<h2 class="bg-success padding-y-5 text-center">ユーザ登録入力画面<br>ユーザ登録をします。内容を入力してください</h2>
 	<%-- action 属性にサーブレットを指定 --%>
 	<form action="./uic" method="post">
-		<table style="width: 400px" class="table container padding-y-5">
+		<table style="width: 500px" class="table container padding-y-5">
 			
 			<tr>
 				<%-- ログインID入力欄の名前はloginId --%>
@@ -41,7 +41,7 @@
 			
 			<tr>
 				<%-- アイコン入力欄の名前はicon --%>
-				<td class="color-main text-left icon-icon-piggy">アイコン</td>
+				<td class="color-main text-left icon-piggy">アイコン</td>
 			
 				<td><label><input type="radio" name="icon" value="icon-user" <c:if test="${empty icon || icon eq 'icon-user'}">checked</c:if>><span class="icon-user pe-3x pe-va"></span></label></td>
 				<td><label><input type="radio" name="icon" value="icon-user-female"  <c:if test="${icon eq 'icon-user-female'}">checked</c:if>><span class="icon-user-female pe-3x pe-va"</span></label></td>

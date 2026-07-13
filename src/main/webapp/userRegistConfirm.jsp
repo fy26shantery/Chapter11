@@ -25,17 +25,17 @@
 			</tr>
 			<tr>
 				<%-- ユーザ名入力欄の名前はuserName --%>
-				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;ユーザ名</th>
+				<th><span class="icon-headphones pe-2x pe-va"></span>&nbsp;ユーザ名</th>
 				<td colspan="3">${userName}</td>
 			</tr>
 			<tr>
 				<%-- パスワード入力欄の名前はpassword --%>
-				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;パスワード</th>
+				<th><span class="icon-piggy pe-2x pe-va"></span>&nbsp;パスワード</th>
 				<td colspan="3">${password}</td>
 			</tr>
 			<tr>
 				<%-- アイコン入力欄の名前はicon --%>
-				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;アイコン</th>
+				<th><span class="icon-users pe-2x pe-va"></span>&nbsp;アイコン</th>
 				<c:if test="${icon == 'icon-user'}">
 					<%-- リクエストスコープの alert の値を出力 --%>
 					<td colspan="2""><span class="icon-user pe-3x pe-va"</span></td>
@@ -48,7 +48,7 @@
 				
 			<tr>
 				<%-- プロフィール入力欄の名前はprofile --%>
-				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;プロフィール</th>
+				<th><span class="icon-study pe-2x pe-va"></span>&nbsp;プロフィール</th>
 				<td clospan="3">${profile}</td>
 			</tr>
 			

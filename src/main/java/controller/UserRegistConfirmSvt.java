@@ -92,7 +92,8 @@ public class UserRegistConfirmSvt extends HttpServlet {
 
 			}
 
-			if (messageId == null && messageName == null && messagePass == null) {
+			if (messageId == null && messageName == null && messagePass == null && messageIcon == null
+					&& messagePro == null) {
 
 				request.setAttribute("loginId", loginId);
 				request.setAttribute("userName", userName);
