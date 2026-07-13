@@ -112,12 +112,12 @@ public class DBManager extends SnsDAO {
 		UserDTO user = null;
 
 		try (Connection conn = getConnection()) {
-			String sql = "SELECT * FORM user WHERE loginId = ?";
+			String sql = "SELECT * FROM users WHERE loginId = ?";
 
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setString(1, "loginId");
+				pstmt.setString(1, loginId);
 
-				try (ResultSet rset = pstmt.executeQuery(sql);) {
+				try (ResultSet rset = pstmt.executeQuery();) {
 
 					if (rset.next()) {
 						user = new UserDTO();
@@ -132,10 +132,10 @@ public class DBManager extends SnsDAO {
 		return user;
 	}
 
-	public UserDTO registerUser(String loginId, String userName, String password, String Icon, String profile) {
+	public boolean registerUser(String loginId, String userName, String password, String icon, String profile) {
 
-		String sql = "INSERT INTO shouts (loginId, userName, password, Icon, profile) VALUES (?,?,?,?,?)";
-		UserDTO user = null;
+		String sql = "INSERT INTO users (loginId, userName, password, icon, profile) VALUES (?,?,?,?,?)";
+		boolean ok = false;
 
 		try (Connection conn = getConnection()) {
 
@@ -144,18 +144,18 @@ public class DBManager extends SnsDAO {
 				pstmt.setString(1, loginId);
 				pstmt.setString(2, userName);
 				pstmt.setString(3, password);
-				pstmt.setString(4, Icon);
+				pstmt.setString(4, icon);
 				pstmt.setString(5, profile);
 
 				int result = pstmt.executeUpdate();
 
-				if (result > 0) {
-
+				if (result != 0) {
+					ok = true;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return user;
+		return ok;
 	}
 }

@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,17 +19,7 @@ import dto.UserDTO;
 public class UserRegistInputSvt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	//userRegistInput.jspで「送信」が押された時
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,6 +41,7 @@ public class UserRegistInputSvt extends HttpServlet {
 		String message6 = null;
 		String message7 = null;
 		String message8 = null;
+		String message9 = null;
 
 		boolean isError = false;
 
@@ -80,10 +70,10 @@ public class UserRegistInputSvt extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
 			isError = true;
 
-		} else if (loginId.length() <= 4 || loginId.length() >= 32) {
+		} else if (loginId.length() < 4 || loginId.length() > 32) {
 
 			//ログインID
-			message2 = "ログインIDの入力は４文字以上です";
+			message2 = "ログインIDの入力は4文字以上、32文字以内です";
 
 			//エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert2", message2);
@@ -112,7 +102,7 @@ public class UserRegistInputSvt extends HttpServlet {
 		//ユーザーネームチェック
 		if (userName == null || userName.equals("")) {
 			//パスワード未入力
-			message4 = "パスワードは必須入力です";
+			message4 = "ユーザーネームは必須入力です";
 
 			//エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert4", message4);
@@ -121,10 +111,10 @@ public class UserRegistInputSvt extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
 			isError = true;
 
-		} else if (userName.length() <= 1 || userName.length() >= 64) {
+		} else if (userName.length() < 1 || userName.length() > 64) {
 
-			//パスワード文字数表現
-			message5 = "ログインIDの入力は４文字以上です";
+			//ユーザーネーム文字数表現
+			message5 = "ユーザーネームの入力は1文字以上64文字以内で入力してください";
 
 			//エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert5", message5);
@@ -150,7 +140,7 @@ public class UserRegistInputSvt extends HttpServlet {
 		} else if (!password.matches("^[0-9A-Za-z]*$")) {
 
 			//パスワード正規表現
-			message6 = "ログインIDの入力に半角英数字以外が使用されています";
+			message6 = "パスワードの入力に半角英数字以外が使用されています";
 
 			//エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert6", message6);
@@ -159,10 +149,10 @@ public class UserRegistInputSvt extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
 			isError = true;
 
-		} else if (password.length() >= 4 || password.length() <= 32) {
+		} else if (password.length() < 4 || password.length() > 32) {
 
 			//パスワード文字数表現
-			message7 = "ログインIDの入力は４文字以上です";
+			message7 = "パスワードの入力は4文字以上,32文字以内で入力してください";
 
 			//エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert7", message7);
@@ -185,13 +175,28 @@ public class UserRegistInputSvt extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
 			isError = true;
 
-		} else if (userName.length() >= 128) {
+		} else if (userName.length() > 128) {
 
 			//アイコン文字数表現
 			message8 = "アイコンは必須選択です";
 
 			//エラーメッセージをリクエストオブジェクトに保存
 			request.setAttribute("alert8", message8);
+
+			//index.jspに処理を転送
+			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
+			isError = true;
+
+		}
+
+		//プロフィールチェック
+		if (profile.length() > 128) {
+
+			//プロフィール文字数表現
+			message9 = "プロフィールは128文字以下の記入になります";
+
+			//エラーメッセージをリクエストオブジェクトに保存
+			request.setAttribute("alert9", message9);
 
 			//index.jspに処理を転送
 			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
@@ -215,22 +220,44 @@ public class UserRegistInputSvt extends HttpServlet {
 
 			//入力されたものをそのまま送る場合
 			//フォーワードで画面遷移
-			ServletContext sc = getServletContext();
-			RequestDispatcher rd = sc.getRequestDispatcher("/userRegistConfirm.jsp");
-			rd.forward(request, response);
 
-		} else {
-
-			message8 = "なにも入力されていません。";
-
-			//エラーメッセージをリクエストオブジェクトに保存
-			request.setAttribute("alert1", message1);
-
-			dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
+			dispatcher = request.getRequestDispatcher("userRegistConfirm.jsp");
 
 		}
 
 		dispatcher.forward(request, response);
+
+	}
+
+	//userRegistConfirm.jspでキャンセルが押された場合,情報を保持したまま登録画面にもどる
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		//文字化け対策
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+
+		String loginId = request.getParameter("loginId");
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+		String icon = request.getParameter("icon");
+		String profile = request.getParameter("profile");
+
+		UserDTO u = new UserDTO();
+
+		u.setLoginId(loginId);
+		u.setUserName(userName);
+		u.setPassword(password);
+		u.setIcon(icon);
+		u.setProfile(profile);
+
+		request.setAttribute("backUser", u);
+
+		//入力されたものをそのまま送る場合
+		//フォーワードで画面遷移
+
+		RequestDispatcher rd = request.getRequestDispatcher("userRegistInput.jsp");
+		rd.forward(request, response);
 
 	}
 

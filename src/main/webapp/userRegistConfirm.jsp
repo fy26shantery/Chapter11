@@ -27,14 +27,12 @@
 			<td class="color-main text-left">
 			<span class="icon-id pe-2x pe-va"></span>ログインID</td>
 			<td>${newUser.loginId}</td>
-			<input type="hidden" name="loginId" value="${newUser.loginId}">
 		</tr>
 		<tr>
 			<%-- ユーザー名確認 --%>
 			<td class="color-main text-left">
 			<span class="icon-user pe-2x pe-va"></span>ユーザー名</td>
 			<td>${newUser.userName}</td>
-			<input type="hidden" name="userName" value="${newUser.userName}">
 			
 		</tr>
 
@@ -42,32 +40,34 @@
 			<%-- パスワード確認 --%>
 			<td class="color-main text-left">
 			<span class="icon-key pe-2x pe-va"></span>パスワード</td>
-			<td>${nsewUser.password}</td>
-			<input type="hidden" name="password" value="${newUser.password}">
+			<td>${newUser.password}</td>
 			
 		</tr>
 		
 		<tr>
 		<%-- icon確認 --%>
 		<td class="color-main text-left">
-		<span class="icon-rocket pe-2x pe-va"></span>アイコン</td>
-		<c:if test="${newUser.icon == 'male'}">
-			<span class="icon-box">
-				<i class="icon-user pe-2x pe-va"></i>
-			</span>
-		</c:if>
-		<c:if test="${newUser.icon == 'female'}">
-			<span class="icon-box">
-				<i class="icon-user-female pe-2x pe-va"></i>
-			</span>
-		</c:if>
+			<span class="icon-rocket pe-2x pe-va"></span>アイコン
+		</td>
+		<td class="text-left">
+			<c:if test="${newUser.icon == 'icon-user'}">
+				<span class="icon-box">
+					<i class="icon-user pe-2x pe-va"></i>
+				</span>
+			</c:if>
+			<c:if test="${newUser.icon == 'icon-user-female'}">
+				<span class="icon-box">
+					<i class="icon-user-female pe-2x pe-va"></i>
+				</span>
+			</c:if>
+		</td>
+		</tr>
 		
 		<tr>
 			<%-- プロフィール確認 --%>
 			<td class="color-main text-left">
 			<span class="icon-rocket pe-2x pe-va"></span>プロフィール</td>
 			<td>${newUser.profile}</td>
-			<input type="hidden" name="profile" value="${newUser.profile}">
 			
 		</tr>
 	</table>
@@ -76,12 +76,18 @@
 		<tr>
 			<td colspan="2" class="text-right"><input class="btn"
 			type="submit" value="OK" /></td>
-</form>	
-<form action="userRegistInput.jsp" method="post">
+ 
 			<td colspan="2" class="text-left"><input class="btn"
-			type="submit" value="キャンセル" /></td>
+			type="submit" value="キャンセル" formaction="./uii" formmethod="get" /></td>
 </form>
 		</tr>
+		
+	<input type="hidden" name="loginId" value="${newUser.loginId}">
+	<input type="hidden" name="userName" value="${newUser.userName}">
+	<input type="hidden" name="password" value="${newUser.password}">
+	<input type="hidden" name="icon" value="${newUser.icon}">
+	<input type="hidden" name="profile" value="${newUser.profile}">
+	
 	</table>
 </div>
 </div>
