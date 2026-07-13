@@ -60,13 +60,16 @@
 <!--アイコン選択-->
 			<tr>
 				<td class="color-main text-left">アイコン<span class="color-error">（必須）</span></td>
-				<td class="text-left"><label style="margin-right: 15px;">
+				<td class="text-left">
+				<div style="display: flex; gap: 20px; align-items: center;">
+				<label class="fancy-radio">
 						<input type="radio" name="icon" value="pe-7s-user" ${param.icon == 'pe-7s-user' ? 'checked' :''}> <span
 						class="pe-7s-user pe-lg pe-va"></span> 男性ユーザー
-				</label> <label> <input type="radio" name="icon"
+				</label> <label class="fancy-radio"> <input type="radio" name="icon"
 						value="pe-7s-user-female" ${param.icon == 'pe-7s-user-female' ? 'checked' :''}> <span
 						class="pe-7s-user-female pe-lg pe-va"></span> 女性ユーザー
-				</label> <c:if test="${!empty requestScope.errIcon}">
+				</label>
+				</div> <c:if test="${!empty requestScope.errIcon}">
 						<div class="color-error">
 							<c:out value="${requestScope.errIcon}" />
 						</div>
