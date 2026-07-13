@@ -47,6 +47,7 @@ public class UserRegistConfirmSvt extends HttpServlet {
 		String messageId = null;
 		String messageName = null;
 		String messagePass = null;
+		String messageIcon = null;
 		String messagePro = null;
 
 		String action = request.getParameter("action");
@@ -64,11 +65,11 @@ public class UserRegistConfirmSvt extends HttpServlet {
 			}
 
 			if (userName == null || userName.isBlank()) {//空白だったら
-				messageName = "名前は必須入力です。1～64文字で入力してください";
+				messageName = "ユーザ名は必須入力です。1～64文字で入力してください";
 				// エラーメッセージをリクエストオブジェクトに保存
 				request.setAttribute("alertName", messageName);
 			} else if (!userName.matches("^.{1,64}$")) {//半角英数字じゃなくて1-64桁じゃなかった場合
-				messageName = "1～64文字でで入力してください";
+				messageName = "ユーザ名は1～64文字でで入力してください";
 				request.setAttribute("alertName", messageName);
 			}
 
@@ -81,8 +82,12 @@ public class UserRegistConfirmSvt extends HttpServlet {
 				request.setAttribute("alertPass", messagePass);
 			}
 
+			if (icon.equals(null)) {
+				messagePro = "アイコンを選択してください";
+				request.setAttribute("alertIcon", messageIcon);
+			}
 			if (!userName.matches("^.{0,128}$")) { //128文字よりも大きかったら
-				messagePro = "128文字以内で入力してください";
+				messagePro = "プロフィールは128文字以内で入力してください";
 				request.setAttribute("alertPro", messagePro);
 
 			}

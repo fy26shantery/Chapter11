@@ -89,8 +89,14 @@
 			</c:if>
 			<c:if test="${requestScope.alertPro != null && requestScope.alertPro != ''}">
 				<tr>
-					<%-- リクエストスコープの alert の値を出力 --%>
+					<%-- リクエストスコープの alertIcon の値を出力 --%>
 					<td colspan="2" class="color-error text-left"><c:out value="${requestScope.alertPro}" /></td>
+				</tr>
+			</c:if>
+			<c:if test="${requestScope.alertIcon != null && requestScope.alertIcon != ''}">
+				<tr>
+					<%-- リクエストスコープの alert の値を出力 --%>
+					<td colspan="2" class="color-error text-left"><c:out value="${requestScope.alertIcon}" /></td>
 				</tr>
 			</c:if>
 	</form>
