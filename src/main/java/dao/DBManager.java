@@ -130,7 +130,7 @@ public class DBManager extends SnsDAO {
 					if (rset.next()) {
 						// 必要な列から値を取り出し、ユーザー情報オブジェクトを生成
 						user = new UserDTO();
-						user.setLoginId(rset.getString(2));
+						user.setLoginId(rset.getString("loginId"));
 					}
 				}
 			}

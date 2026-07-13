@@ -45,14 +45,15 @@
 					<td colspan="2""><span class="icon-user-female pe-3x pe-va"</span></td>
 				</c:if>
 			</tr>
-				
 			<tr>
 				<%-- プロフィール入力欄の名前はprofile --%>
 				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;プロフィール</th>
 				<td clospan="3">${profile}</td>
 			</tr>
-			
-			
+			<tr>
+			<form action="./uii" method="post">
+				<td colspan="2" class="text-right"><input class="btn" type="submit" name="action" value="戻る" /></td>	
+			</form>
 			</tr>
 	</form>
 </body>

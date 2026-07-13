@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/helper.css">
 </head>
 <body>
-	<h2 class="bg-success padding-y-5 text-center">ユーザ登録入力画面<br>ユーザ登録をします。内容を入力してください</h2>
+	<h2 class="bg-success padding-y-5 text-center">ユーザ登録確認画面<br>登録をします。よろしいでしょうか？</h2>
 	<%-- action 属性にサーブレットを指定 --%>
 	
 		<table style="width: 400px" class="table container padding-y-5">
@@ -21,17 +21,17 @@
 			<tr>
 				<%-- ログインID入力欄の名前はloginId --%>
 				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;ログインID</th>
-				<td clospan="3">${loginId}</td>
+				<td colspan="3">${loginId}</td>
 			</tr>
 			<tr>
 				<%-- ユーザ名入力欄の名前はuserName --%>
 				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;ユーザ名</th>
-				<td clospan="3">${userName}</td>
+				<td colspan="3">${userName}</td>
 			</tr>
 			<tr>
 				<%-- パスワード入力欄の名前はpassword --%>
 				<th><span class="icon-magic-wand pe-2x pe-va"></span>&nbsp;パスワード</th>
-				<td clospan="3">${password}</td>
+				<td colspan="3">${password}</td>
 			</tr>
 			<tr>
 				<%-- アイコン入力欄の名前はicon --%>
@@ -55,6 +55,11 @@
 			<tr>
 				<form action="./uir" method="post">
 					<td colspan="2" class="text-right"><input class="btn" type="submit" name="action" value="OK" /></td>
+					<input type="hidden" name="loginId" id="loginId" value="${loginId}">
+					<input type="hidden" name="userName" value="${userName}">
+					<input type="hidden" name="password" value="${password}">
+					<input type="hidden" name="icon" value="${icon}">
+					<input type="hidden" name="profile" value="${profile}">
 				</form>
 				<form action="./uii" method="post">
 					<input type="hidden" name="loginId" id="loginId" value="${loginId}">

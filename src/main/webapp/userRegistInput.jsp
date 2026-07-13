@@ -34,7 +34,7 @@
 				<%-- パスワード入力欄の名前はpassword --%>
 				<td class="color-main text-left icon-home">パスワード</td>
 				<td class="text-left"><input class="form-control"
-				type="password" name="password" value="${password}" size="20" /></td>
+				type="text" name="password" value="${password}" size="20" /></td>
 			</tr>
 			
 			
@@ -85,6 +85,12 @@
 				<tr>
 					<%-- リクエストスコープの alert の値を出力 --%>
 					<td colspan="2" class="color-error text-left"><c:out value="${requestScope.alertPass}" /></td>
+				</tr>
+			</c:if>
+			<c:if test="${requestScope.alertPro != null && requestScope.alertPro != ''}">
+				<tr>
+					<%-- リクエストスコープの alert の値を出力 --%>
+					<td colspan="2" class="color-error text-left"><c:out value="${requestScope.alertPro}" /></td>
 				</tr>
 			</c:if>
 	</form>

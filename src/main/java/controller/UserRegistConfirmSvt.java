@@ -47,6 +47,7 @@ public class UserRegistConfirmSvt extends HttpServlet {
 		String messageId = null;
 		String messageName = null;
 		String messagePass = null;
+		String messagePro = null;
 
 		String action = request.getParameter("action");
 		RequestDispatcher dispatcher = null;
@@ -54,20 +55,20 @@ public class UserRegistConfirmSvt extends HttpServlet {
 		if ("登録".equals(action)) {
 
 			if (loginId == null || loginId.isBlank()) {//空白だったら
-				messageId = "Idは必須入力です。4～32桁の半角英数字を入力してください";
+				messageId = "IDは必須入力です。4～32桁の半角英数字を入力してください";
 				// エラーメッセージをリクエストオブジェクトに保存
 				request.setAttribute("alertId", messageId);
 			} else if (!loginId.matches("^[0-9a-zA-Z]{4,32}$")) {//半角英数字じゃなくて4-32桁じゃなかった場合
-				messageId = "4～32桁の半角英数字を入力してください";
+				messageId = "IDは4～32桁の半角英数字を入力してください";
 				request.setAttribute("alertId", messageId);
 			}
 
 			if (userName == null || userName.isBlank()) {//空白だったら
-				messageName = "名前は必須入力です。4～32桁の半角英数字を入力してください";
+				messageName = "名前は必須入力です。1～64文字で入力してください";
 				// エラーメッセージをリクエストオブジェクトに保存
 				request.setAttribute("alertName", messageName);
 			} else if (!userName.matches("^.{1,64}$")) {//半角英数字じゃなくて1-64桁じゃなかった場合
-				messageName = "1～64桁で入力してください";
+				messageName = "1～64文字でで入力してください";
 				request.setAttribute("alertName", messageName);
 			}
 
@@ -76,8 +77,14 @@ public class UserRegistConfirmSvt extends HttpServlet {
 				// エラーメッセージをリクエストオブジェクトに保存
 				request.setAttribute("alertPass", messagePass);
 			} else if (!password.matches("^[0-9a-zA-Z]{4,32}$")) {//半角英数字じゃなくて4-32桁じゃなかった場合
-				messagePass = "4～32桁の半角英数字を入力してください";
+				messagePass = "パスワードは4～32桁の半角英数字を入力してください";
 				request.setAttribute("alertPass", messagePass);
+			}
+
+			if (!userName.matches("^.{0,128}$")) { //128文字よりも大きかったら
+				messagePro = "128文字以内で入力してください";
+				request.setAttribute("alertPro", messagePro);
+
 			}
 
 			if (messageId == null && messageName == null && messagePass == null) {
@@ -89,7 +96,6 @@ public class UserRegistConfirmSvt extends HttpServlet {
 				request.setAttribute("profile", profile);
 				dispatcher = request.getRequestDispatcher("userRegistConfirm.jsp");
 
-				dispatcher.forward(request, response);
 			} else {
 				dispatcher = request.getRequestDispatcher("userRegistInput.jsp");
 			}

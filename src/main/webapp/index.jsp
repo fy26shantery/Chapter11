@@ -35,8 +35,11 @@
 			</tr>
 		
 			<tr>
-				<td colspan="2" class="text-right"><input class="btn" type="submit" value="ログイン" /></td>	
-<!--				<td colspan="2" class="text-right"><a href="uii" class="btn">新規登録</a>-->
+				<td colspan="2" class="text-right"><input class="btn" type="submit" value="ログイン" /></td>
+	</form>
+	<form action="./uii" method="post">
+		<td colspan="2" class="text-right"><input class="btn" type="submit" name="action" value="新規登録" /></td>	
+	</form>
 				
 			</tr>
 			<%-- リクエストスコープにalertがあれば --%>
@@ -55,9 +58,6 @@
 			</c:if>
 		</table>
 	</form>
-	<form action="./uii" method="post">
-						<td colspan="2" class="text-right"><input class="btn" type="submit" name="action" value="新規登録" /></td>	
-		
-	</form>
+	
 </body>
 </html>

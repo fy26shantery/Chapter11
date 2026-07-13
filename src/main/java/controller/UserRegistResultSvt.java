@@ -40,6 +40,8 @@ public class UserRegistResultSvt extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+
 		String loginId = request.getParameter("loginId");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
@@ -59,7 +61,14 @@ public class UserRegistResultSvt extends HttpServlet {
 
 		RequestDispatcher dispatcher = null;
 		if (dbm.insertUser(udto)) { //trueならデータベースに登録完了
+
+			request.setAttribute("loginId", loginId);
+			request.setAttribute("userName", userName);
+			request.setAttribute("password", password);
+			request.setAttribute("icon", icon);
+			request.setAttribute("profile", profile);
 			dispatcher = request.getRequestDispatcher("userRegistResult.jsp");
+
 		} else {
 			// すでにデータベースにIDがあったら
 			message = "すでにデータベースにIDがあります";
