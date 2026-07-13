@@ -1,0 +1,20 @@
+
+/* 2つのアイコン全体を横並びにする設定 */
+.icon-select-container {
+    display: flex;
+    gap: 30px; /* 男性と女性のアイコンの間の隙間 */
+}
+
+/* アイコンとラジオボタンを綺麗に右側へ横並びにする設定 */
+.icon-select-box {
+    display: inline-flex;
+    align-items: center; /* 縦方向の真ん中を揃える */
+}
+
+/* skyblue.cssのfancy-radioのズレを強制リセット */
+.icon-select-box .fancy-radio {
+    display: inline-block !important;
+    margin: 0 0 0 8px !important; /* アイコンの右側に8pxの隙間を開けてボタンを配置 */
+    position: relative;
+    top: 0;
+}

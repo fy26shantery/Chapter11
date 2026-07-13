@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="./css/skyblue.css">
 <link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 <link rel="stylesheet" href="css/helper.css">
+<link rel="stylesheet" href="css/my.css">
 </head>
 <body>
 	<h2 class="bg-success padding-y-5 text-center">ユーザ登録入力画面<br>ユーザ登録をします。内容を入力してください</h2>
@@ -40,12 +41,35 @@
 			
 			
 			<tr>
-				<%-- アイコン入力欄の名前はicon --%>
-				<td class="color-main text-left icon-piggy">アイコン</td>
-			
-				<td><label><input type="radio" name="icon" value="icon-user" <c:if test="${empty param.icon || param.icon eq 'icon-user'}">checked</c:if>><span class="icon-user pe-3x pe-va"></span></label></td>
-				<td><label><input type="radio" name="icon" value="icon-user-female"  <c:if test="${param.icon eq 'icon-user-female'}">checked</c:if>><span class="icon-user-female pe-3x pe-va"</span></label></td>
+  				 <%-- 他の行と揃えるため th から td に変更 --%>
+   				 <td class="color-main text-left icon-piggy">アイコン</td>
+    
+   				 <%-- 右側の td の中に、2つのアイコンセットをまとめます --%>
+   				 <td class="text-left">
+     			 <div class="icon-select-container">
+     			 <!-- 男性アイコン用 -->
+           			<div class="icon-select-box"><%--「男性のイラストアイコン」と「そのラジオボタン」を1つのグループとして扱う --%>
+                		<span class="icon-user pe-3x pe-va"></span>
+                		<label class="fancy-radio">
+                    		<input type="radio" name="icon" value="icon-user" <c:if test="${empty param.icon || param.icon eq 'icon-user'}">checked</c:if>>
+                    		<span></span>
+                		</label>
+            		</div>
+            
+           			 <!-- 女性アイコン用 -->
+            		<div class="icon-select-box">
+                		<span class="icon-user-female pe-3x pe-va"></span>
+                		<label class="fancy-radio">
+                    		<input type="radio" name="icon" value="icon-user-female" <c:if test="${param.icon eq 'icon-user-female'}">checked</c:if>>
+                    		<span></span>
+                		</label>
+            		</div>
+        		</div>
+    			</td>
 			</tr>
+
+			
+			
 			<tr>
 				<%-- プロフィール入力欄の名前はprofile --%>
 				<td class="color-main text-left icon-paperclip">プロフィール</td>
@@ -58,6 +82,7 @@
 			</form>
 			<form action="./uii" method="post">
 				<td colspan="2" class="text-right"><input class="btn" type="submit" name="action" value="戻る" /></td>	
+			</form>
 			</tr>
 			<%-- リクエストスコープにalertIdがあれば --%>
 			<c:if test="${requestScope.alert != null && requestScope.alert != ''}">
@@ -99,6 +124,5 @@
 					<td colspan="2" class="color-error text-left"><c:out value="${requestScope.alertIcon}" /></td>
 				</tr>
 			</c:if>
-	</form>
 </body>
 </html>

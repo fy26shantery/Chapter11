@@ -59,7 +59,7 @@ public class UserRegistConfirmSvt extends HttpServlet {
 				messageId = "IDは必須入力です。4～32桁の半角英数字を入力してください";
 				// エラーメッセージをリクエストオブジェクトに保存
 				request.setAttribute("alertId", messageId);
-			} else if (!loginId.matches("^[0-9a-zA-Z]{4,32}$")) {//半角英数字じゃなくて4-32桁じゃなかった場合
+			} else if (!loginId.matches("^[0-9a-z]{4,32}$")) {//半角英数字じゃなくて4-32桁じゃなかった場合
 				messageId = "IDは4～32桁の半角英数字を入力してください";
 				request.setAttribute("alertId", messageId);
 			}
@@ -77,7 +77,7 @@ public class UserRegistConfirmSvt extends HttpServlet {
 				messagePass = "パスワードは必須入力です。4～32桁の半角英数字を入力してください";
 				// エラーメッセージをリクエストオブジェクトに保存
 				request.setAttribute("alertPass", messagePass);
-			} else if (!password.matches("^[0-9a-zA-Z]{4,32}$")) {//半角英数字じゃなくて4-32桁じゃなかった場合
+			} else if (!password.matches("^[0-9a-z]{4,32}$")) {//半角英数字じゃなくて4-32桁じゃなかった場合
 				messagePass = "パスワードは4～32桁の半角英数字を入力してください";
 				request.setAttribute("alertPass", messagePass);
 			}
