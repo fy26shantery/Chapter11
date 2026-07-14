@@ -134,7 +134,7 @@ public class DBManager extends SnsDAO {
 		return false; //ユーザーが見つからない場合かエラーが起きた時
 	}
 
-	public UserDTO setTouroku(String userName, String loginId, String password, String icon,
+	public UserDTO setTouroku(String loginId, String password, String userName, String icon,
 			String profile) {
 		UserDTO u = new UserDTO();
 
@@ -144,6 +144,31 @@ public class DBManager extends SnsDAO {
 		u.setIcon(icon);
 		u.setProfile(profile);
 		return u;
+	}
+
+	//入力した登録データをデータベースに挿入する作業
+	public boolean insertUser(String loginId, String password, String userName, String icon, String profile) {
+		String sql = "INSERT INTO users(loginId, password, userName, icon, profile) VALUES(?,?,?,?,?)";
+
+		try (Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setString(1, loginId);
+			pstmt.setString(2, password);
+			pstmt.setString(3, userName);
+			pstmt.setString(4, icon);
+			pstmt.setString(5, profile);
+
+			int insert = pstmt.executeUpdate();
+
+			if (insert == 1) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

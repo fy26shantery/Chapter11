@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="./css/skyblue.css">
 <link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
 <link rel="stylesheet" href="./css/helper.css">
-<link rel="stylesheet" href="./css/.css">
 </head>
 <body>
 
@@ -32,11 +31,6 @@
 		<td class="text-center"><input class="form-control" type="text" name="tourokuId" value="" size="20" autofocus /></td>
 	</tr>
 	
-	<tr>
-		<%-- ユーザー名入力欄の名前はtourokuname --%>
-		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;ユーザー名</td>
-		<td class="text-center"><input class="form-control" type="text" name="tourokuName" value="" size="20" /></td>
-	</tr>
 	
 	<tr>
 		<%-- パスワード入力欄の名前はtourokupass --%>
@@ -44,12 +38,20 @@
 		<td class="text-center"><input class="form-control" type="text" name="tourokuPass" value="" size="20" /></td>
 	</tr>
 	
+	<tr>
+		<%-- ユーザー名入力欄の名前はtourokuname --%>
+		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;ユーザー名</td>
+		<td class="text-center"><input class="form-control" type="text" name="tourokuName" value="" size="20" /></td>
+	</tr>
+	
 	<%-- アイコン選択欄の名前はtourokuicon --%>
 	<tr>
 	<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;アイコン</td>
 	<td>
-	<label class="fancy-radio"><span></span><input type="radio" name="tourokuIcon" id="maleicon" value="" checked><span class="icon-speaker pe-2x pe-va"></span></label>
-	<label class="fancy-radio"><span></span><input type="radio" name="tourokuIcon" id="femaleicon" value=""><span class="icon-speaker pe-2x pe-va"></span></label>
+	<span class="icon-user pe-2x pe-va"></span>
+	<label><input type="radio" name="tourokuIcon" id="maleicon" value="icon-user" checked></label>
+	<span class="icon-user-female pe-2x pe-va"></span>
+	<label><input type="radio" name="tourokuIcon" id="femaleicon" value="icon-user-female"></label>
 	</td>
 	</tr>
 	
@@ -79,11 +81,11 @@
 	</c:if>
 	
 	<c:if
-	test="${requestScope.halfwidthAlert != null && requestScope.halfwidthAlert !=''}">
+	test="${requestScope.passwordAlert != null && requestScope.passwordAlert !=''}">
 	<tr>
 		<%-- リクエストスコープの alert の値を出力 --%>
 		<td colspan="2" class="color-error text-left"><c:out
-			value="${requestScope.halfwidthAlert}" /></td>
+			value="${requestScope.passwordAlert}" /></td>
 	</tr>
 	</c:if>
 	
@@ -95,6 +97,52 @@
 		<%-- リクエストスコープの alert の値を出力 --%>
 		<td colspan="2" class="color-error text-left"><c:out
 			value="${requestScope.existingIdAlert}" /></td>	
+			
+	</tr>
+	</c:if>
+	
+	<%-- リクエストスコープにalertがあれば --%>
+	<c:if
+	test="${requestScope.insertAlert != null && requestScope.insertAlert !=''}">
+	<tr>
+		<%-- リクエストスコープの alert の値を出力 --%>
+		<td colspan="2" class="color-error text-left"><c:out
+			value="${requestScope.insertAlert}" /></td>	
+			
+	</tr>
+	</c:if>
+	
+	
+	<%-- リクエストスコープにalertがあれば --%>
+	<c:if
+	test="${requestScope.userNameAlert != null && requestScope.userNameAlert !=''}">
+	<tr>
+		<%-- リクエストスコープの alert の値を出力 --%>
+		<td colspan="2" class="color-error text-left"><c:out
+			value="${requestScope.userNameAlert}" /></td>	
+			
+	</tr>
+	</c:if>
+	
+	
+	<%-- リクエストスコープにalertがあれば --%>
+	<c:if
+	test="${requestScope.loginIdAlert != null && requestScope.loginIdAlert !=''}">
+	<tr>
+		<%-- リクエストスコープの alert の値を出力 --%>
+		<td colspan="2" class="color-error text-left"><c:out
+			value="${requestScope.loginIdAlert}" /></td>	
+			
+	</tr>
+	</c:if>
+	
+	<%-- リクエストスコープにalertがあれば --%>
+	<c:if
+	test="${requestScope.profileAlert != null && requestScope.profileAlert !=''}">
+	<tr>
+		<%-- リクエストスコープの alert の値を出力 --%>
+		<td colspan="2" class="color-error text-left"><c:out
+			value="${requestScope.profileAlert}" /></td>	
 			
 	</tr>
 	</c:if>

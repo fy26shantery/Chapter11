@@ -42,7 +42,7 @@
 		<%-- ログインボタン --%>
 		<td colspan="2" class="text-center"><input class="btn" type="submit" value="ログイン" /></td>
 	
-		<%-- 新規登録ボタン --%>
+		<%-- 新規登録ボタン  サーブレット経由--%> 
 	<td colspan="2" class="text-center"><input class="btn" onclick="location.href='userRegistInput.jsp'" value="新規登録"></td>
 	</form>
 	</tr>

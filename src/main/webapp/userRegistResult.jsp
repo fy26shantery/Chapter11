@@ -18,7 +18,7 @@
 	
 		<h4><strong>ユーザー登録確認画面</strong>
 		<br>
-		<strong>登録します。よろしいでしょうか？</strong>
+		<strong>以下の内容で登録が完了しました。</strong>
 		</h4>
 	</div>
 </div>
@@ -29,38 +29,37 @@
 	<tr>
 		<%-- 登録するログインID表示 --%>
 		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;ログインID</td>
-		<td >${user.loginId}</td>
-	</tr>
-	
-	<tr>
-		<%-- 登録するユーザー名表示 --%>
-		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;ユーザー名</td>
-		<td >${user.loginId}</td>
+		<td >${param.loginId}</td>
 	</tr>
 	
 	<tr>
 		<%-- 登録するパスワード表示 --%>
 		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;パスワード</td>
-		<td>${user.password}</td>
+		<td>${param.password}</td>
 	</tr>
+	
+	<tr>
+		<%-- 登録するユーザー名表示 --%>
+		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;ユーザー名</td>
+		<td >${param.userName}</td>
+	</tr>
+	
 	
 	<%-- 登録するアイコン表示 --%>
 	<tr>
 	<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;アイコン</td>
-	<td>${user.icon}</td>
+	<td>${param.icon}</td>
 	</tr>
 	
 	
 	<tr>
 		<%-- 登録するプロフィール文表示 --%>
 		<td class="color-main text-center"><span class="icon-speaker pe-2x pe-va"></span>&nbsp;プロフィール</td>
-		<td>${user.profile}</td>
+		<td>${param.profile}</td>
 	</tr>
 	
-	<tr>
-		<td class="text-center"><input class="btn" type="submit" value="OK" /></td>
-	
-	<td class="text-center"><input class="btn" onclick="location.href='userRegistInput.jsp'" value="キャンセル" ></td>
+	<tr>	
+	<td class="text-center"><input class="btn" onclick="location.href='index.jsp'" value="戻る" ></td>
 	</form>
 	</tr>
 	
